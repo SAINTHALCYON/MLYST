@@ -1,0 +1,331 @@
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>001 - PURPOSE </title>
+
+<style>
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #000000;
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
+}
+
+/* Top banner */
+#top-banner {
+    background: #8b0000; /* dark red */
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+/* Main container */
+#container {
+    width: 900px;
+    margin: 20px auto;
+    display: flex;
+    gap: 15px;
+}
+
+/* Left profile sidebar */
+#sidebar {
+    width: 220px;
+    border: 1px solid #8b0000;
+    padding: 10px;
+    font-size: 12px;
+    background: #000000;
+}
+
+#sidebar img {
+    width: 100%;
+    border: 1px solid #8b0000;
+    margin-bottom: 10px;
+}
+
+#sidebar a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.profile-item {
+    margin-bottom: 6px;
+    color: #ffffff;
+}
+
+/* Blog entry area */
+#content {
+    flex: 1;
+}
+
+.entry {
+    background: #000000;
+    border: 1px solid #8b0000;
+    padding: 15px;
+    font-size: 13px;
+}
+
+.entry h2 {
+    margin-top: 0;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+.entry-date {
+    font-size: 11px;
+    color: #cccccc;
+    margin-bottom: 10px;
+}
+
+.entry-footer {
+    margin-top: 15px;
+    font-size: 11px;
+    color: #8b0000;
+    border-top: 1px solid #8b0000;
+    padding-top: 5px;
+}
+
+#footer {
+    width: 900px;
+    margin: 30px auto;
+    border: 2px solid #8b0000;
+    text-align: center;
+    padding: 15px;
+    font-size: 13px;
+    color: #ffffff;
+    background: #000000;
+}
+</style>
+</head>
+
+<body>
+
+<div id="top-banner">
+    “ANYTHING I DON'T LIKE, SUCKS!”
+</div>
+
+<div id="container">
+
+    <!-- Sidebar -->
+<div id="sidebar" style="position: relative;">
+    <img src="GUNEH.gif" alt="Profile Pic">
+
+    <a href="../index.html">← back</a>
+
+    <div class="profile-item"><strong>FATHER INTO YOUR HANDS I COMMEND MY SPIRIT,</strong></div>
+    <div class="profile-item"><strong>FATHER INTO YOUR HANDS,</strong></div>
+    <div class="profile-item"><strong>WHY HAVE YOU FORSAKEN ME?</strong></div>
+    <div class="profile-item"><strong>IN YOUR EYES FORSAKEN ME,</strong></div>
+    <div class="profile-item"><strong>IN YOUR THOUGHTS FORSAKEN ME,</strong></div>
+    <div class="profile-item"><strong>IN YOUR HEART FORSAKEN ME.</strong></div>
+    <div class="profile-item"><strong>TRUST IN MY—</strong></div>
+    <div class="profile-item"><strong>SELF-RIGHTEOUS SUICIDE,</strong></div>
+    <div class="profile-item"><strong>I CRY WHEN ANGELS DESERVE TO DIE,</strong></div>
+    <div class="profile-item"><strong>IN MY SELF-RIGHTEOUS SUICIDE.</strong></div>
+    <div class="profile-item"><strong>I CRY WHEN ANGELS DESERVE TO DIE</strong></div> 
+    <br><br><br><br><br> 
+    <span id="statusText" class="status-red"></span>
+
+    <!-- CORNER IMAGE -->
+    <div class="corner-image">
+        <img src="SOADP.jpg" alt="">
+    </div>
+
+    <script>
+    const statuses = [
+      "CHOP SUEY!",
+      "SYSTEM OF A DOWN",
+      "TOXICITY",
+      "2001"
+    ];
+
+    const reds = [
+      "#ff0000",
+      "#cc0000",
+      "#8b0000",
+      "#ff4444",
+      "#aa0000"
+    ];
+
+    let index = 0;
+    const statusEl = document.getElementById("statusText");
+
+    function updateStatus() {
+      statusEl.textContent = statuses[index];
+      statusEl.style.color = reds[Math.floor(Math.random() * reds.length)];
+      index = (index + 1) % statuses.length;
+    }
+
+    updateStatus();
+    setInterval(updateStatus, 2000);
+    </script>
+</div>
+
+<style>
+/* Corner image  */
+.corner-image {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 90px;    
+  height: 90px;
+  border: 1px solid #ff0000;
+  box-shadow:
+    0 0 20px #cc0000,
+    0 0 35px #660000;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.corner-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+}
+</style>
+
+    <!-- Main -->
+    <div id="content">
+        <div class="entry">
+            <h2>PURPOSE</h2>
+            <div class="entry-date">Saturday, January 3rd, 2026</div>
+
+            <p>
+                hello. i don't really expect anyone to be reading this unless i've done something vile or killed myself, but welcome to my page. this poorly made html site is dedicated on documenting myself, because i don't trust social media and the (((people))) who manage them
+            </p>
+
+            <p>
+                for the record, i'm not really talented in terms of coding (as if i have talent in anything at all) so you will see mistakes throughout this website....<br>
+anyhow, ill be updating this thing once in a while, im not a motherfucking pajeet techgod o algo so any sloppy mistakes should be turned a blind eye on because ignorance is indeed bliss. <br> (i know that that's not really the way youre supposed to use that quote, but this is my blog, and I DON'T CARE)
+            </p>
+
+            <p>
+                you will might have a hard time trying to read my entries at some point because i'm very insufferable and dramatic (to a certain extent,,) but in my opinion the only reason why my entries might be deemed as cringe is because people nowadays can only withstand reading under the pretense of brainrot terms without considering it be “corny”. hate and laugh at me all you want, but you have to acknoledge it's trve. it's not even funny and i find anyone who thinks otherwise as mentally impaired. everyone keeps saying this is the best time to live, i hear it everywhere. online, at school, and from adults who insists this era as “better now”. if this is considered better, then the bar is buried 7ft underground shoved into dirlewanger's asscrack. modern society is destroyed beyond repair, and honestly the best solution i could suggest is to not try a solution at all. i'm not telling you to slobber on jewish 'ganda, but rather live while being aware of the horrors and atrocities happening, but do nothing about itand let society decay to it's worst! the earth is our body and society is a disease. ever hesrd of autoimmune? you could compare it to that. once you catch it, there's no cure whilst all the good cells are attacked by the immume system. guess (((who's))) the immune system? you can't cure it, you can only slow it. that's your sad and helpless position.  it's not like you can do much about it, the people who have the power to do so are the same ones kissing and rubbing their ass on the wall meanwhile the actual good and influential people get their shit jugged (REFERRING TO JFK, GADAFFI, KIRK [somehow..]) you feel me?
+                <br>
+                <br>
+congratulations if you made it this far. i doubt you'd want to read more, but i don't care... ok..you can go drink, cry and kill yourself!!!!! nigger!!!!               
+            </p>
+
+            <div class="entry-footer">
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>nigga musicplayer</title>
+
+<style>
+  body {
+  }
+
+  #music-player {
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  button {
+    background: black;
+    color: red;
+    border: 1px solid darkred;
+    padding: 10px 16px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  button:hover {
+    background: darkred;
+    color: black;
+  }
+
+  #pause-text {
+    margin-top: 12px;
+    color: white;
+    font-size: 14px;
+    font-weight:bold;
+    display: none;
+    animation: blink 2s infinite;
+  }
+
+  @keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+</style>
+</head>
+
+<body>
+
+<div id="music-player">
+  <audio id="audio" src=/MLYST/CHOPSUEY.MP3></audio>
+
+  <div class="controls">
+    <button id="play">▐▐
+  </div>
+
+  <div id="pause-text">
+    you should really listen to this banger, but suit yourself.
+  </div>
+</div>
+
+<script>
+  const audio = document.getElementById("audio");
+  const playBtn = document.getElementById("play");
+  const pauseText = document.getElementById("pause-text");
+
+  let autoplayUnlocked = false;
+
+  window.addEventListener("load", () => {
+    audio.play().then(() => {
+      autoplayUnlocked = true;
+    }).catch(() => {
+    });
+  });
+
+  document.addEventListener("click", () => {
+    if (!autoplayUnlocked) {
+      audio.play().then(() => {
+        autoplayUnlocked = true;
+      });
+    }
+  }, { once: true });
+
+  playBtn.addEventListener("click", () => {
+    if (audio.paused) {
+      audio.play();
+    } else {
+      audio.pause();
+    }
+  });
+
+  audio.addEventListener("play", () => {
+    playBtn.textContent = "▐▐";
+    pauseText.style.display = "none";
+  });
+
+  audio.addEventListener("pause", () => {
+    playBtn.textContent = "▶";
+    pauseText.style.display = "block";
+  });
+</script>
+
+</body>
+</html>
+
+<!-- idk how to add a border for the music player without fuckimg the lsyout. i dont why youre reading tbiz. how did you get here man? --!>

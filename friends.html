@@ -1,0 +1,195 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    /* BODY FILL */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #000000;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 20px;
+      color: #fff;
+    }
+
+  
+    }
+
+    .sparkle {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: #ff3b3b;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #ff3b3b;
+      animation: sparkle 2s infinite ease-in-out;
+    }
+
+    @keyframes sparkle {
+      0%, 100% { opacity: 0; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1.4); }
+    }
+
+
+    .layout {
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      gap: 10px;
+    }
+
+    .side-banner {
+      width: 60px;
+      display: flex;
+      align-items: stretch;
+    }
+
+    .side-banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    /* FRIEND box parent */
+    .friends-wrapper {
+      display: flex;
+      flex-direction: column; /* stack container + back link */
+      align-items: flex-start; /* back link aligns with left edge */
+      gap: 10px; /* space between boxes and back link */
+    }
+
+    /* friends cintainer */
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .friends-box {
+      background-color: #000000;
+      border: 2px solid #950606;
+      border-radius: 10px;
+      padding: 10px;
+      width: 300px;
+      box-shadow: 0 0 10px rgba(149, 6, 6, 0.4);
+    }
+
+    .friends-title {
+      background-color: #950606;
+      color: #fff;
+      font-weight: bold;
+      text-align: center;
+      padding: 5px;
+      border-radius: 6px 6px 0 0;
+      letter-spacing: 1px;
+      text-shadow: 0 0 5px #000;
+    }
+
+    .friend-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 10px;
+      border-bottom: 1px solid #2c2c2c;
+      color: #d6d6d6;
+      font-size: 0.9rem;
+    }
+
+    .friend-item:last-child {
+      border-bottom: none;
+    }
+
+    /* STARSN */
+    @keyframes colorShift {
+      0% { color: #ff3b3b; }
+      50% { color: #ffffff; }
+      100% { color: #888888; }
+    }
+
+    .star {
+      animation: colorShift 3s infinite ease-in-out;
+    }
+
+    .friend-item:nth-child(1) .star { animation-delay: 0s; }
+    .friend-item:nth-child(2) .star { animation-delay: 1s; }
+    .friend-item:nth-child(3) .star { animation-delay: 2s; }
+    .friend-item:nth-child(4) .star { animation-delay: 3s; }
+
+    /* BACKLINK colojrs */
+    .color-link {
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.2rem;
+      animation: redShift 3s infinite alternate;
+      margin-left: 5px; 
+    }
+
+    @keyframes redShift {
+      0%   { color: #ff1a1a; }
+      25%  { color: #ff3333; }
+      50%  { color: #ff4d4d; }
+      75%  { color: #ff6666; }
+      100% { color: #ff8080; }
+    }
+
+    .color-link:hover {
+      text-shadow: 0 0 5px #ff4d4d, 0 0 10px #ff1a1a;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ignorw -->
+  <div class="banner">
+    <div class="sparkle" style="top:20px; left:30px;"></div>
+    <div class="sparkle" style="top:60px; right:40px; animation-delay:0.5s;"></div>
+    <div class="sparkle" style="bottom:25px; left:50%; animation-delay:1s;"></div>
+  </div>
+
+  <!-- side banners, kayout -->
+  <div class="layout">
+    <div class="side-banner left-banner">
+      <img src="/MLYST/FRIENDSLISTBANNER.jpg" alt="Left Banner">
+    </div>
+
+    <!-- friends box, parent, blablaba -->
+    <div class="friends-wrapper">
+      <div class="container">
+        <div class="friends-box">
+          <div class="friends-title">ONLINE</div>
+          <div class="friend-item">wyatt <span class="star">☆</span></div>
+          <div class="friend-item">moodle <span class="star">☆</span></div>
+          <div class="friend-item">mae <span class="star">☆</span></div>
+          <div class="friend-item">frank <span class="star">☆</span></div>
+          <div class="friend-item">uzbek <span class="star">☆</span></div>
+          <div class="friend-item">crunch <span class="star">☆</span></div>
+          <div class="friend-item">hawk <span class="star">☆</span></div>
+        </div>
+
+        <div class="friends-box">
+          <div class="friends-title">IRL</div>
+          <div class="friend-item">rin <span class="star">☆</span></div>
+          <div class="friend-item">nat <span class="star">☆</span></div>
+        </div>
+      </div>
+
+      <!-- BACK LINK -->
+      <a href="../index.html" class="color-link">← back</a>
+    </div>
+
+    <div class="side-banner right-banner">
+      <img src="/MLYST/FRIENDSLISTBANNER.jpg" alt="Right Banner">
+    </div>
+  </div>
+
+</body>
+</html>
+
+<div class="small-banner">
+  <img src=/MLYST/BEGODLIKE.gif alt="Small Banner">
+</div>

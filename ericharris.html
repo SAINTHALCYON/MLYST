@@ -1,0 +1,337 @@
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>002 - ERIC HARRIS </title>
+
+<style>
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #000000;
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
+}
+
+/* Top banner */
+#top-banner {
+    background: #8b0000; /* dark red */
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+/* Main container */
+#container {
+    width: 900px;
+    margin: 20px auto;
+    display: flex;
+    gap: 15px;
+}
+
+/* Left profile sidebar */
+#sidebar {
+    width: 220px;
+    border: 1px solid #8b0000;
+    padding: 10px;
+    font-size: 12px;
+    background: #000000;
+}
+
+#sidebar img {
+    width: 100%;
+    border: 1px solid #8b0000;
+    margin-bottom: 10px;
+}
+
+#sidebar a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.profile-item {
+    margin-bottom: 6px;
+    color: #ffffff;
+}
+
+/* Blog entry area */
+#content {
+    flex: 1;
+}
+
+.entry {
+    background: #000000;
+    border: 1px solid #8b0000;
+    padding: 15px;
+    font-size: 13px;
+}
+
+.entry h2 {
+    margin-top: 0;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+.entry-date {
+    font-size: 11px;
+    color: #cccccc;
+    margin-bottom: 10px;
+}
+
+.entry-footer {
+    margin-top: 15px;
+    font-size: 11px;
+    color: #8b0000;
+    border-top: 1px solid #8b0000;
+    padding-top: 5px;
+}
+
+#footer {
+    width: 900px;
+    margin: 30px auto;
+    border: 2px solid #8b0000;
+    text-align: center;
+    padding: 15px;
+    font-size: 13px;
+    color: #ffffff;
+    background: #000000;
+}
+</style>
+</head>
+
+<body>
+
+<div id="top-banner">
+    “KILL MANKIND”
+</div>
+
+<div id="container">
+
+    <!-- Sidebar -->
+<div id="sidebar" style="position: relative;">
+    <img src="REBPOST2.jpg" alt="Profile Pic">
+
+    <a href="../index.html">← back</a>
+
+    <div class="profile-item"><strong>I'LL CHAIN YOU TO THE TRUTH,</strong></div>
+    <div class="profile-item"><strong>FOR THE TRUTH SHALL SET YOU FREE,</strong></div>
+    <div class="profile-item"><strong>I'LL TURN THE SCREWS OF VENGEANCE AND BURY YOU WITH HONESTY</strong></div>
+    <div class="profile-item"><strong>I'LL MAKE YOUR DREAMS COME TO LIFE,</strong></div>
+    <div class="profile-item"><strong>AND SLAY THEM AS THEY CAME</strong></div>
+    <div class="profile-item"><strong>SMOTHER ANOTHER FAILURE</strong></div>
+    <div class="profile-item"><strong>LAY THIS TO REST</strong></div>
+    <div class="profile-item"><strong>CONSOLE YOURSELF, YOU'RE BETTER ALONE</strong></div>
+    <div class="profile-item"><strong>DESTROY YOURSELF, SEE WHO GIVES A FUCK</strong></div>
+    <div class="profile-item"><strong>ABSORB YOURSELF, YOU'RE BETTER ALONE</strong></div>
+    <div class="profile-item"><strong>DESTROY YOURSELF</strong></div> 
+    <br><br><br><br><br> 
+    <span id="statusText" class="status-red"></span>
+
+    <!-- CORNER IMAGE -->
+    <div class="corner-image">
+        <img src="LOLHAH.jpg" alt="">
+    </div>
+<br>
+    <script>
+    const statuses = [
+      "LAID TO REST",
+      "LAMB OF GOD",
+      "ASHES OF THE WAKE",
+      "2004"
+    ];
+
+    const reds = [
+      "#ff0000",
+      "#cc0000",
+      "#8b0000",
+      "#ff4444",
+      "#aa0000"
+    ];
+
+    let index = 0;
+    const statusEl = document.getElementById("statusText");
+
+    function updateStatus() {
+      statusEl.textContent = statuses[index];
+      statusEl.style.color = reds[Math.floor(Math.random() * reds.length)];
+      index = (index + 1) % statuses.length;
+    }
+
+    updateStatus();
+    setInterval(updateStatus, 2000);
+    </script>
+</div>
+
+<style>
+/* Corner image  */
+.corner-image {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 90px;    
+  height: 90px;
+  border: 1px solid #ff0000;
+  box-shadow:
+    0 0 20px #cc0000,
+  overflow: hidden;
+  z-index: 10;
+}
+
+.corner-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+}
+</style>
+
+    <!-- Main -->
+    <div id="content">
+        <div class="entry">
+            <h2>ERIC HARRIS</h2>
+            <div class="entry-date">Sunday, January 4th, 2026</div>
+
+            <p>
+                guten abend. i was pretty much doing nothing except for being a useless fuck and sitting on my ass all day while working on this website whilst texting my online friends. i was on ACS (A Columbine Site) reading about columbime, obviously. 
+            </p>
+
+            <p>
+                to be honest, he's one of the reasons why i'm motivated to start up my own website, besides than me constantly being suspended from other platforms because  freedom of speech is a false concept made up for the elite's leverage to push their own agendas only rather than giving society it's rights.. but it's fine. some people (more like the majority of humanity) are retarded and shouldn't speak either way <br>
+i just wanted to voice my opinions on eric's AOL and journals. he's either quite reasonable or just plain moronic. it's usually the latter. even if he's right, it'd be a hard read because this nigga is constantly threatening to blow someone's head off and rape tbeir asshole or something <br> it was a nice read, i did laugh at some of his blogs(?) and tried sharing them with other people but since humour is subjective (they have garbage perspective and is a trooned out fag) not alot of people are really amused by it...
+            </p>
+
+            <p>
+                well, i'm thinking that columbine happened because of a few reasonss. for an example you could you say psychological factors. when you read the journals, you gotta admit they had significant mental health issues. i mean, (((he))) was depressed and had suicidal ideation, meanwhile reb was just a psycho jfl 
+                <br>
+                <br> apart from that, official reports kinds focused on the fact they were going through bullying and social isolation.... they js wanted to get revenge on those who made them miserable, liek tbe jocks... idk man. they also got bullied bh fucking freshmans, and as much as i hate to admit it, theyre retarded soycucks (oh, the irony) in addition, they also desired fame and infamy..... (LOL I FEEL LIKE WRITING AN ENGLISH ESSAY, but i rather feel that way rsther than constantly spewing out slurs like a brainlet with horrible literature skills) they really wanted their plan to be remembered, and theh wanted to outdo the previous shootings n stuff.. congratulations, reb and VoDKa, you have the columbine effect!!!!!
+               oh, and btw, stop bitching about the fact i referenced eric alot on here and i have saint elliot as my icon on the about me card. i am in LOVE with eric harris inside out. “why do you avoid mentioning (((dylan)))” take a WILD guess buddy. it was clear that eric has national socialist leanings, i still don't know why he wanted to be friends with that kike... loneliness makes you desperate i guess. 
+                <br>
+                okay so, specifically about reb. his AOL isn't that bad like how i described earlier. but still, his threats were constant and it got less scary by each read. i still don't understand how brooks brown felt threatened by him. i really like this specific line in his journal (which is fairly famous and was also featured in the Zero Hour documentary) when he was ranting about how the owner of the van he robbed should be shot because he left his stuff on the front seat of his  van on "fri-fucking-day night". that was funny. people say i remind them of eric and i also thought so sometimes. eric would've hated me doe. it doesn't matter. he's dead and i'm horribly parasocial.
+                <br>
+                <br>
+i'd be a lame shooter. i don't even want to be a marytyr, i simply just want people dead for the love of the game. i dislike alot of people around me, and i'm kind of a racist. i approve on killing judes but i wouldn't waste my energy trying to get rid of em. but if you wanna do so, i'm rooting for ya   
+<br>
+i hope you like the song i added, i love it and i think it's gemmy
+            </p>
+
+            <div class="entry-footer">
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>nigga musicplayer</title>
+
+<style>
+  body {
+  }
+
+  #music-player {
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  button {
+    background: black;
+    color: red;
+    border: 1px solid darkred;
+    padding: 10px 16px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  button:hover {
+    background: darkred;
+    color: black;
+  }
+
+  #pause-text {
+    margin-top: 12px;
+    color: white;
+    font-size: 14px;
+    font-weight:bold;
+    display: none;
+    animation: blink 2s infinite;
+  }
+
+  @keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+</style>
+</head>
+
+<body>
+
+<div id="music-player">
+  <audio id="audio" src=/MLYST/LAIDTOREST.MP3></audio>
+
+  <div class="controls">
+    <button id="play">▐▐
+  </div>
+
+  <div id="pause-text">
+    you should really listen to this banger, but suit yourself.
+  </div>
+</div>
+
+<script>
+  const audio = document.getElementById("audio");
+  const playBtn = document.getElementById("play");
+  const pauseText = document.getElementById("pause-text");
+
+  let autoplayUnlocked = false;
+
+  window.addEventListener("load", () => {
+    audio.play().then(() => {
+      autoplayUnlocked = true;
+    }).catch(() => {
+    });
+  });
+
+  document.addEventListener("click", () => {
+    if (!autoplayUnlocked) {
+      audio.play().then(() => {
+        autoplayUnlocked = true;
+      });
+    }
+  }, { once: true });
+
+  playBtn.addEventListener("click", () => {
+    if (audio.paused) {
+      audio.play();
+    } else {
+      audio.pause();
+    }
+  });
+
+  audio.addEventListener("play", () => {
+    playBtn.textContent = "▐▐";
+    pauseText.style.display = "none";
+  });
+
+  audio.addEventListener("pause", () => {
+    playBtn.textContent = "▶";
+    pauseText.style.display = "block";
+  });
+</script>
+
+</body>
+</html>
+
+<!-- clearly, youre searching for something --!>

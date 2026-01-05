@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CHAT</title>
+
+<style>
+:root{
+  --bg:#000;
+  --panel:#0b0b0b;
+  --accent:#b30000;
+  --text:#fff;
+  --muted:#aaa;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+}
+.wrap{
+  max-width:1000px;
+  margin:20px auto;
+  padding:20px;
+}
+.header{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:20px;
+}
+.logo{
+  width:50px;
+  height:50px;
+  background:var(--accent);
+  color:#000;
+  font-weight:bold;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.chat{
+  display:grid;
+  grid-template-columns:1fr 300px;
+  gap:16px;
+}
+@media(max-width:900px){
+  .chat{grid-template-columns:1fr}
+}
+.panel{
+  background:var(--panel);
+  border:2px solid rgba(179,0,0,.4);
+  padding:16px;
+}
+.messages{
+  height:60vh;
+  overflow-y:auto;
+  margin-bottom:12px;
+}
+.msg{
+  display:flex;
+  gap:10px;
+  margin-bottom:10px;
+}
+.avatar{
+  width:40px;
+  height:40px;
+  background:#111;
+  color:var(--accent);
+  font-weight:bold;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.bubble{
+  background:#111;
+  padding:10px;
+  border-left:3px solid var(--accent);
+}
+.meta{
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:4px;
+}
+.sendbar{
+  display:flex;
+  gap:8px;
+}
+input{
+  background:#000;
+  color:#fff;
+  border:1px solid #333;
+  padding:10px;
+  width:100%;
+}
+button{
+  background:var(--accent);
+  border:none;
+  padding:10px 14px;
+  font-weight:bold;
+  cursor:pointer;
+}
+.online li{
+  list-style:none;
+  padding:6px;
+  border-left:3px solid var(--accent);
+  background:#111;
+  margin-bottom:6px;
+}
+.small{font-size:13px;color:var(--muted)}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+  <div class="header">
+    <div class="logo">★</div>
+    <div>
+      <strong>CHAT</strong>
+      <div class="small">mlyst is a real nigga for this</div>
+    </div>
+  </div>
+
+  <div class="chat">
+    <div class="panel">
+      <div id="messages" class="messages"></div>
+      <div class="sendbar">
+        <input id="msgInput" placeholder="hate speech goes here">
+        <button id="sendBtn">SEND</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="small"> username</div>
+      <div style="display:flex;gap:6px;margin-bottom:12px">
+        <input id="nameInput" placeholder="your name goes here">
+        <button id="saveName">SET</button>
+      </div>
+
+      <div class="small">Online users</div>
+      <ul id="online" class="online"></ul>
+    </div>
+  </div>
+</div>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.24.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.24.0/firebase-database-compat.js"></script>
+
+<script>
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBdPwrYyi72jsKtEU2-YZfR5Mner2fUCyE",
+  authDomain: "mlyst-e5254.firebaseapp.com",
+  databaseURL: "https://mlyst-e5254-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "mlyst-e5254",
+  storageBucket: "mlyst-e5254.appspot.com",
+  messagingSenderId: "323414869354",
+  appId: "1:323414869354:web:fbfd86b46deb8248c7d113"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+/* ELEMENTS */
+const messages = document.getElementById("messages");
+const msgInput = document.getElementById("msgInput");
+const sendBtn = document.getElementById("sendBtn");
+const nameInput = document.getElementById("nameInput");
+const saveName = document.getElementById("saveName");
+const onlineList = document.getElementById("online");
+
+/* USERNAME */
+let username = localStorage.getItem("chat_name") || "anon";
+nameInput.value = username;
+
+saveName.onclick = () => {
+  username = nameInput.value.trim() || "anon";
+  localStorage.setItem("chat_name", username);
+  updatePresence();
+};
+
+/* PRESENCE */
+const uid = "u_" + Math.random().toString(36).slice(2);
+const presenceRef = db.ref("presence/" + uid);
+
+function updatePresence(){
+  presenceRef.set({ name: username, ts: Date.now() });
+}
+presenceRef.onDisconnect().remove();
+updatePresence();
+
+db.ref("presence").on("value", snap => {
+  onlineList.innerHTML = "";
+  const data = snap.val() || {};
+  Object.values(data).forEach(u => {
+    const li = document.createElement("li");
+    li.textContent = u.name;
+    onlineList.appendChild(li);
+  });
+});
+
+/* MESSAGES */
+db.ref("messages").limitToLast(200).on("child_added", snap => {
+  const m = snap.val();
+  const div = document.createElement("div");
+  div.className = "msg";
+  div.innerHTML = `
+    <div class="avatar">${m.name[0].toUpperCase()}</div>
+    <div class="bubble">
+      <div class="meta">${m.name}</div>
+      ${m.text}
+    </div>`;
+  messages.appendChild(div);
+  messages.scrollTop = messages.scrollHeight;
+});
+
+sendBtn.onclick = send;
+msgInput.onkeydown = e => e.key === "Enter" && send();
+
+function send(){
+  const text = msgInput.value.trim();
+  if(!text) return;
+  db.ref("messages").push({
+    name: username,
+    text,
+    ts: Date.now()
+  });
+  msgInput.value = "";
+}
+</script>
+</body>
+</html>
