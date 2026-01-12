@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>sainthalcyon</title>
+
+<style>
+body {
+  background: repeating-linear-gradient(
+    45deg,
+    #ffe4f1,
+    #ffe4f1 12px,
+    #fff1f8 12px,
+    #fff1f8 24px
+  );
+  color: #6b3355;
+  font-family: Tahoma, Verdana, sans-serif;
+}
+
+a {
+  color: #ff77b7;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #ff4fa0;
+  text-decoration: underline;
+}
+
+table {
+  border-color: #ff9acb;
+  background: #fff6fb;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #ff9acb;
+}
+
+h1, h2, h3 {
+  color: #ff5fa2;
+}
+
+.gif-banner {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  border-top: 1px solid #ff9acb;
+  border-bottom: 1px solid #ff9acb;
+  overflow: hidden;
+  margin: 8px 0;
+}
+
+.gif-banner img {
+  width: 100%;
+  height: 60%;
+  object-fit: cover;
+  image-rendering: pixelated;
+}
+
+/* pastel AIM status */
+#aimStatus {
+  font-size: 16px;
+}
+
+.status-red {
+  transition: color 0.3s ease;
+}
+
+/* STICKERS */
+.sticker {
+  position: absolute;
+  pointer-events: none;
+}
+
+.sticker img {
+  width: 80px;
+  opacity: 0.9;
+}
+
+/* random positions */
+.s1 { top: 40px; left: 30px; }
+.s2 { top: 120px; right: 60px; }
+.s3 { bottom: 100px; left: 80px; }
+.s4 { bottom: 40px; right: 120px; }
+
+</style>
+</head>
+
+<body>
+
+<!-- STICKERS -->
+<div class="sticker s1"><img src="STICKER1.png"></div>
+<div class="sticker s2"><img src="STICKER2.png"></div>
+<div class="sticker s3"><img src="STICKER3.png"></div>
+<div class="sticker s4"><img src="STICKER4.png"></div>
+
+<table width="700" align="center" border="1" cellpadding="10">
+<tr>
+<td>
+
+<div class="gif-banner">
+  <img src="NATURALSELECTION.gif">
+  <img src="WRATH.gif">
+</div>
+
+<h1>GUTEN MORGEN, LEUTE!</h1>
+
+<div id="aimStatus">
+  <b>note:</b> <span style="color:#ff5fa2;">mlyst's internet diary</span><br>
+  <span id="statusText" class="status-red"></span>
+</div>
+
+<script>
+const statuses = [
+  "★ he who is rich is contented",
+  "★ how bout the prick's face when xe saw da larp",
+  "★ the sustenance follows the way of the heart",
+  "★ #theywillnevergetridofme"
+];
+
+const reds = [
+  "#FEF1AB",
+  "#ff4fa0",
+  "#CEEEF8",
+  "#E9F9E5",
+  "#D0C3F1"
+];
+
+let index = 0;
+const statusEl = document.getElementById("statusText");
+
+function updateStatus() {
+  statusEl.textContent = statuses[index];
+  statusEl.style.color = reds[Math.floor(Math.random() * reds.length)];
+  index = (index + 1) % statuses.length;
+}
+
+updateStatus();
+setInterval(updateStatus, 1400);
+</script>
+
+<p><b>last updated:</b> april 1999 (lying)</p>
+
+<hr>
+
+<p>
+this is my personal page<br>
+i write rants here<br>
+i post things i like<br>
+don't like, don't stay
+</p>
+
+<hr>
+
+<h3>entries</h3>
+<ul>
+  <li><a href="MLYST/purpose2.html">001 - purpose</a></li>
+  <li><a href="MLYST/ericharris.html">002 - eric harris</a></li>
+</ul>
+
+<hr>
+
+<h3>extra</h3>
+<ul>
+  <li><a href="https://www.tumblr.com/studiomilitary?source=share" target="_blank">
+    my tumblr, if you somehow got this link from somewhere else
+  </a></li>
+  <li><a href="MLYST/friends.html">friends</a></li>
+  <li><a href="MLYST/embedwidgetorwtv.html">chat with other stalkers</a></li>
+</ul>
+
+</td>
+</tr>
+</table>
+
+<br><br>
+
+<!-- ABOUT ME PAGE BELOW -->
+
+<style>
+.title-bar {
+  background: #ff9acb;
+  color: #ffffff;
+  border-bottom: 1px solid #ff4fa0;
+}
+
+.profile-table td {
+  border-bottom: 1px solid #ffd1e6;
+}
+
+b {
+  color: #ff5fa2;
+}
+
+.quote {
+  color: #a0527c;
+  font-style: italic;
+}
+
+img {
+  border: 1px solid #ff9acb;
+}
+</style>
+
+<table width="700" align="center" border="1" cellpadding="8">
+<tr>
+<td>
+
+<table width="100%" cellpadding="4" class="title-bar">
+<tr>
+<td><b>ABOUT ME</b></td>
+</tr>
+</table>
+
+<br>
+
+<table width="100%" border="0">
+<tr>
+<td valign="top">
+<h2>Profile for:<br><b>MLYST</b></h2>
+</td>
+
+<td valign="top" align="right">
+<img src="../MLYST/ELLIOTMOGGER.jpg" width="130">
+</td>
+</tr>
+</table>
+
+<table width="100%" border="0" cellpadding="4" class="profile-table">
+<tr><td width="150"><b>Member Name:</b></td><td>DAMIA</td></tr>
+<tr><td><b>Location:</b></td><td>somewhere unfortunate</td></tr>
+<tr><td><b>Birthdate:</b></td><td>16/06</td></tr>
+<tr><td><b>Sex:</b></td><td>foid</td></tr>
+<tr><td><b>Marital Status:</b></td><td>take a wild guess</td></tr>
+<tr><td><b>Hobbies:</b></td><td>drawing, sperging out, being cringe,,</td></tr>
+<tr><td><b>Occupation:</b></td><td>student</td></tr>
+<tr>
+<td valign="top"><b>Personal Quote:</b></td>
+<td class="quote">“bad publicity is still good publicity, son”</td>
+</tr>
+</table>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>
