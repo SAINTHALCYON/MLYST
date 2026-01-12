@@ -9,11 +9,10 @@ body{
   background:url("http://i.pinimg.com/1200x/b4/0e/ad/b40ead081804ce1887e13ba2fc1562ed.jpg");
   font-family:Tahoma, Verdana;
   margin:0;
-  color:;#faa0c0
+  color:#faa0c0;
   position:relative;
 }
 
-}
 /* window */
 #window{
   width:800px;
@@ -113,6 +112,22 @@ body{
   display:block;
   margin-top:4px;
 }
+
+/* vertical banners */
+#banner-left, #banner-right {
+  position:fixed;
+  top:20px;
+  width:80px;
+  height:calc(100% - 40px);
+  background-size:cover;
+  background-repeat:no-repeat;
+  border:2px solid #ff99cc;
+  z-index:1;
+}
+
+#banner-left { left:20px; background-image:url('https://i.imgur.com/your-left-banner.png'); }
+#banner-right { right:20px; background-image:url('https://i.imgur.com/your-right-banner.png'); }
+
 </style>
 </head>
 
@@ -137,7 +152,8 @@ body{
 🎵 now playing<br>
 <small>don't forget her</small><br>
 <audio controls autoplay loop>
-<source src="https://youtu.be/LY9LHEIx-BE?si=Q7-oYLcJ9Ue7Zh9v">
+  <source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Kevin_MacLeod/Jazz_Sampler/Kevin_MacLeod_-_Carefree.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
 </audio>
 </div>
 
@@ -156,21 +172,23 @@ body{
 </div>
 
 <div class="friend">
+<img src="https://i.imgur.com/4KZ5QyB.png">
 <div>nat ✿<br><small>away</small></div>
 </div>
 
 <div class="friend">
+<img src="https://i.imgur.com/2nCt3Sbl.png">
 <div>uzbek ☆<br><small>offline</small></div>
 </div>
 
 <div class="friend">
+<img src="https://i.imgur.com/0s9YQq7.png">
 <div>moodle ♡<br><small>online</small></div>
-  <div>
+</div>
 
- <div class="friend">
- <div>frank ✿<br><small>away</small></div>
-   <div>
-
+<div class="friend">
+<img src="https://i.imgur.com/1X8Y4ZQ.png">
+<div>frank ✿<br><small>away</small></div>
 </div>
 
 </div>
