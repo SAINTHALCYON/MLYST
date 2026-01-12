@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>my friends ✿</title>
+
+<style>
+body{
+  background:url("https://i.pinimg.com/736x/5a/81/0c/5a810c9de3dc0958bf011ba2262f393f.jpg");
+  font-family:Tahoma, Verdana;
+  margin:0;
+  color:#fef0f5;
+  position:relative;
+}
+
+/* vertical banners */
+#banner-left, #banner-right {
+  position:fixed;
+  top:20px; 
+  width:80px;
+  height:calc(100% - 40px)
+  background-size:cover;
+  background-repeat:no-repeat;
+  border:2px solid #ff99cc;
+  z-index:1;
+}
+
+#banner-left { 
+  left:20px;  
+  background-image:url('BANNERV.jpg');
+}
+
+#banner-right { 
+  right:20px; 
+  background-image:url('BANNERV.jpg');
+}
+
+/* window */
+#window{
+  width:800px;
+  margin:40px auto;
+  background:#e8f3ff;
+  border:4px ridge #9fc6ff;
+  position:relative;
+  z-index:2;
+}
+
+/* title bar */
+#titlebar{
+  background:linear-gradient(to right,#b8d9ff,#fbc0e6);
+  color:#fef0f5;
+  padding:6px;
+  font-size:14px;
+  font-weight:bold;
+}
+
+/* layout */
+#app{
+  display:flex;
+  padding:6px;
+  gap:6px;
+}
+
+/* left sidebar */
+#left{
+  width:220px;
+  background:#fff0fa;
+  border:2px inset #ffaad5;
+  padding:6px;
+  color:#fef0f5;
+  display:flex;
+  flex-direction:column;
+}
+
+/* main list */
+#main{
+  flex:1;
+  background:#f7fbff;
+  border:2px inset #a5c8ff;
+  padding:6px;
+  color:#fef0f5;
+}
+
+/* friend card */
+.friend{
+  background:linear-gradient(#fff,#ffe7f6);
+  border:1px solid #ff9ecb;
+  margin-bottom:6px;
+  padding:5px;
+  display:flex;
+  align-items:center;
+  color:#f6d8e6;
+}
+
+.friend img{
+  width:40px;
+  height:40px;
+  margin-right:6px;
+  border-radius:6px;
+  border:1px solid #aaa;
+}
+
+/* buttons */
+.button{
+  background:#ff99cc;
+  border:1px solid #ff7fbf;
+  padding:6px;
+  text-align:center;
+  margin-top:10px;
+  border-radius:4px;
+}
+
+.button a{
+  color:#fef0f5;
+  text-decoration:none;
+}
+
+.button:hover{
+  background:#ff77aa;
+}
+
+/* music player */
+#player{
+  background:#e8f3ff;
+  border:1px solid #a5c8ff;
+  padding:6px;
+  margin-bottom:10px;
+  text-align:center;
+  color:#fef0f5;
+}
+
+#player audio{
+  width:100%;
+  display:block;
+  margin-top:4px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- vertical banners -->
+<div id="banner-left"></div>
+<div id="banner-right"></div>
+
+<div id="window">
+
+<div id="titlebar">
+✿ my friends list ✿
+</div>
+
+<div id="app">
+
+<!-- LEFT SIDE -->
+<div id="left">
+
+<div id="player">
+🎵 now playing<br>
+<small>pastel vibes</small><br>
+<audio controls autoplay loop>
+<source src="https://youtu.be/LY9LHEIx-BE?si=Q7-oYLcJ9Ue7Zh9v">
+</audio>
+</div>
+
+<div class="button">
+<a href="index.html">← back to homepage</a>
+</div>
+
+</div>
+
+<!-- FRIENDS LIST -->
+<div id="main">
+
+<div class="friend">
+<img src="https://i.imgur.com/1X8Y4ZQ.png">
+<div>mika ♡<br><small>online</small></div>
+</div>
+
+<div class="friend">
+<img src="https://i.imgur.com/4KZ5QyB.png">
+<div>hana ✿<br><small>away</small></div>
+</div>
+
+<div class="friend">
+<img src="https://i.imgur.com/2nCt3Sbl.png">
+<div>luna ☆<br><small>offline</small></div>
+</div>
+
+<div class="friend">
+<img src="https://i.imgur.com/0s9YQq7.png">
+<div>emi ♡<br><small>online</small></div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</body>
+</html>
