@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>chatbox</title>
+<title>sthalcyon's lounge</title>
 
 <style>
 body{
@@ -76,13 +76,22 @@ margin-top:15px;
 }
 
 .chatlog{
-height:150px;
+height:180px;
 overflow-y:auto;
 background:white;
 border:1px solid pink;
 padding:5px;
 margin-bottom:5px;
 font-size:13px;
+}
+
+.msg{
+margin-bottom:4px;
+}
+
+.time{
+font-size:10px;
+color:#aaa;
 }
 
 input,button{
@@ -117,11 +126,12 @@ margin-top:15px;
 <img src="images/banner3.png">
 </div>
 
-<p>Welcome to my pastel internet corner ♡</p>
+<p>be mindful and don't be retarded ♡</p>
 
 <!-- CHATBOX -->
 <div class="chatbox">
 <b>sthalcyon's lounge</b>
+
 <div class="chatlog" id="chatlog"></div>
 
 <input type="text" id="name" placeholder="name" size="10">
@@ -135,41 +145,18 @@ Made with love ♡
 
 </div>
 
-<script>
-function createHeart(){
-let heart=document.createElement("div");
-heart.className="heart";
-heart.innerHTML="💗";
-heart.style.left=Math.random()*100+"vw";
-heart.style.animationDuration=3+Math.random()*5+"s";
-document.body.appendChild(heart);
-setTimeout(()=>heart.remove(),8000);
-}
-setInterval(createHeart,400);
-
-// CHATBOX FUNCTION
-function sendMsg(){
-let name=document.getElementById("name").value;
-let msg=document.getElementById("msg").value;
-if(name && msg){
-let log=document.getElementById("chatlog");
-log.innerHTML += "<b>"+name+":</b> "+msg+"<br>";
-log.scrollTop=log.scrollHeight;
-document.getElementById("msg").value="";
-}
-}
+<!-- FIREBASE + HEARTS -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
 import { getFirestore, collection, addDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyCnehPjjKdIE92wm5gPDd-pCCh8NqhuNzI",
   authDomain: "sainthalcyon-d9ddc.firebaseapp.com",
-  databaseURL: "https://sainthalcyon-d9ddc-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "sainthalcyon-d9ddc",
   storageBucket: "sainthalcyon-d9ddc.firebasestorage.app",
   messagingSenderId: "1046819219134",
-  appId: "1:1046819219134:web:a5f4758396b90eea75e0ef",
-  measurementId: "G-F60SG8P2K3"
+  appId: "1:1046819219134:web:a5f4758396b90eea75e0ef"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -183,11 +170,19 @@ onSnapshot(q, (snapshot)=>{
   chatlog.innerHTML = "";
   snapshot.forEach(doc=>{
     let d = doc.data();
-    chatlog.innerHTML += `<b>${d.name}:</b> ${d.msg}<br>`;
+    let date = new Date(d.time);
+    let time = date.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+    chatlog.innerHTML += `
+      <div class="msg">
+        <b>${d.name}:</b> ${d.msg}
+        <div class="time">${time}</div>
+      </div>
+    `;
   });
   chatlog.scrollTop = chatlog.scrollHeight;
 });
 
+// send message
 window.sendMsg = async function(){
   let name = document.getElementById("name").value;
   let msg = document.getElementById("msg").value;
@@ -201,9 +196,20 @@ window.sendMsg = async function(){
     document.getElementById("msg").value="";
   }
 }
+
+// falling hearts
+function createHeart(){
+  let heart=document.createElement("div");
+  heart.className="heart";
+  heart.innerHTML="💗";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.animationDuration=3+Math.random()*5+"s";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),8000);
+}
+setInterval(createHeart,400);
+
 </script>
-script>
-  
 
 </body>
 </html>
