@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Swirl Blog</title>
+
+<style>
+body{
+background:#fff2f7;
+font-family:Verdana;
+color:#555;
+overflow-x:hidden;
+cursor:url("images/cursor.png"), auto;
+}
+
+.page{
+width:900px;
+margin:auto;
+background:white;
+border:4px double pink;
+padding:10px;
+position:relative;
+}
+
+/* TOP BANNER */
+.header img{
+width:100%;
+max-height:180px;
+object-fit:cover;
+border-bottom:4px dashed pink;
+}
+
+/* FALLING HEARTS */
+.heart{
+position:fixed;
+top:-50px;
+font-size:20px;
+animation:fall linear infinite;
+z-index:999;
+}
+
+@keyframes fall{
+0%{transform:translateY(-50px);}
+100%{transform:translateY(110vh);}
+}
+
+/* BUTTON */
+.homebtn{
+background:#ffd6eb;
+border:2px solid pink;
+padding:6px 12px;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+margin:10px 0;
+}
+
+/* BANNERS */
+.bannerbox{
+display:flex;
+gap:10px;
+margin:10px 0;
+}
+
+.bannerbox img{
+width:100px;
+border:2px solid pink;
+border-radius:8px;
+cursor:pointer;
+}
+
+/* CHATBOX */
+.chatbox{
+background:#fff0f7;
+border:3px ridge pink;
+padding:10px;
+margin-top:15px;
+}
+
+.chatlog{
+height:150px;
+overflow-y:auto;
+background:white;
+border:1px solid pink;
+padding:5px;
+margin-bottom:5px;
+font-size:13px;
+}
+
+input,button{
+padding:5px;
+border-radius:6px;
+border:1px solid pink;
+}
+
+/* FOOTER */
+.footer{
+text-align:center;
+font-size:11px;
+color:#aaa;
+margin-top:15px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+<div class="header">
+<img src="images/banner.png">
+</div>
+
+<button class="homebtn" onclick="location.href='index.html'">← Back to Homepage!</button>
+
+<div class="bannerbox">
+<img src="images/banner1.png">
+<img src="images/banner2.png">
+<img src="images/banner3.png">
+</div>
+
+<p>Welcome to my pastel internet corner ♡</p>
+
+<!-- CHATBOX -->
+<div class="chatbox">
+<b>Mini Chatbox</b>
+<div class="chatlog" id="chatlog"></div>
+
+<input type="text" id="name" placeholder="name" size="10">
+<input type="text" id="msg" placeholder="message" size="25">
+<button onclick="sendMsg()">Send</button>
+</div>
+
+<div class="footer">
+Made with love ♡
+</div>
+
+</div>
+
+<script>
+function createHeart(){
+let heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="💗";
+heart.style.left=Math.random()*100+"vw";
+heart.style.animationDuration=3+Math.random()*5+"s";
+document.body.appendChild(heart);
+setTimeout(()=>heart.remove(),8000);
+}
+setInterval(createHeart,400);
+
+// CHATBOX FUNCTION
+function sendMsg(){
+let name=document.getElementById("name").value;
+let msg=document.getElementById("msg").value;
+if(name && msg){
+let log=document.getElementById("chatlog");
+log.innerHTML += "<b>"+name+":</b> "+msg+"<br>";
+log.scrollTop=log.scrollHeight;
+document.getElementById("msg").value="";
+}
+}
+</script>
+
+</body>
+</html>
