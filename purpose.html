@@ -106,6 +106,44 @@ p { font-size:12px; color:#333; }
 </head>
 
 <body>
+  <script src="https://www.youtube.com/iframe_api"></script>
+
+<script>
+let player;
+let isPlaying = false;
+  
+const VIDEO_ID = "EHaP60jB-v4&list=RDEHaP60jB-v4&start_radio=1"; 
+
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player("yt-holder", {
+    height: "0",
+    width: "0",
+    videoId: VIDEO_ID,
+    playerVars: {
+      autoplay: 0,
+      loop: 1,
+      playlist: VIDEO_ID
+    }
+  });
+}
+
+document.getElementById("play").onclick = function () {
+  if (!player) return;
+
+  if (isPlaying) {
+    player.pauseVideo();
+    this.textContent = "▶";
+    document.getElementById("pause-text").style.display = "block";
+    isPlaying = false;
+  } else {
+    player.playVideo();
+    this.textContent = "▐▐";
+    document.getElementById("pause-text").style.display = "none";
+    isPlaying = true;
+  }
+};
+</script>
+
 <div id="frame">
 
 <div id="banner"></div>
@@ -128,51 +166,12 @@ p { font-size:12px; color:#333; }
 
 <p>hey everypony.. as you can see, this website is a rework of my old one because it was too edgy to my own liking i'll try to be consistent woth my updates now since my father lets me use his laptop.</p> <p>the entire purpose of this website is just basically a journal for myself. i don't expect anyone to read this unless i've killed myself, done something vile, or made myself an enemy. (i think you can fuck up if it's the latter.) one of the reasons why i made this website is because i'm constantly getting banned off social media platforms. freedom of speech, they say. i guess it only applies to certain (((people))).. other than that, i just got motivated to do this from reading eric harris's AOL blogs(?) i'll definitely dedicate an entry for him soon. i really like him to the point where it'll be insufferable to discuss about him face to face because i'll be babbling nonstop. the things i might write on this blog would probably contradict the theme. i'm not trying to be those brainlet foids who claim harm and like hello kitty. it's just my contrasting aesthetic preference and mentality. i'm trying to tone down my aggressive personality, anyway!</p> 
   <p>that's all i need to clarify about this website. thanks for reading, stranger ^_^</p>.</p>
-<div id="music-player">
-  <div id="yt"></div>
-  <button id="play">▶</button>
-  <div id="pause-text">listen to me!!</div>
 </div>
 
 </div>
 </div>
 </div>
 
-<script src="https://www.youtube.com/MwC6WxkCxO0&list=RDMwC6WxkCxO0&start_radio=1"></script>
-
-<script>
-let player;
-let playing = false;
-const videoId = "MwC6WxkCxO0&list=RDMwC6WxkCxO0&start_radio=1";
-
-function onYouTubeIframeAPIReady() {
-  player = new YT.Player('yt', {
-    height: '0',
-    width: '0',
-    videoId: videoId,
-    playerVars: {
-      loop: 1,
-      playlist: videoId
-    }
-  });
-}
-
-document.getElementById("play").onclick = () => {
-  if (!player) return;
-
-  if (playing) {
-    player.pauseVideo();
-    document.getElementById("play").textContent = "▶";
-    document.getElementById("pause-text").style.display = "block";
-    playing = false;
-  } else {
-    player.playVideo();
-    document.getElementById("play").textContent = "▐▐";
-    document.getElementById("pause-text").style.display = "none";
-    playing = true;
-  }
-};
-</script>
 
 </body>
 </html>
