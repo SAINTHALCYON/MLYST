@@ -28,15 +28,6 @@ object-fit:cover;
 border-bottom:4px dashed pink;
 }
 
-/* FALLING HEARTS */
-.heart{
-position:fixed;
-top:-50px;
-font-size:20px;
-animation:fall linear infinite;
-z-index:999;
-}
-
 @keyframes fall{
 0%{transform:translateY(-50px);}
 100%{transform:translateY(110vh);}
@@ -118,12 +109,8 @@ margin-top:15px;
 <img src="AMEBANNER.gif">
 </div>
 
-<button class="homebtn" onclick="location.href='index.html'">← Back to Homepage!</button>
+<button class="homebtn" onclick="location.href='index.html'">← back to homepage!</button>
 
-<div class="bannerbox">
-<img src="DIVIDER.png">
-<img src="DIVIDER.png">
-<img src="DIVIDER.png">
 </div>
 
 <p>be mindful and don't be retarded ♡</p>
@@ -195,20 +182,6 @@ window.sendMsg = async function(){
     });
     document.getElementById("msg").value="";
   }
-}
-
-// falling hearts
-function createHeart(){
-  let heart=document.createElement("div");
-  heart.className="heart";
-  heart.innerHTML="💗";
-  heart.style.left=Math.random()*100+"vw";
-  heart.style.animationDuration=3+Math.random()*5+"s";
-  document.body.appendChild(heart);
-  setTimeout(()=>heart.remove(),8000);
-}
-setInterval(createHeart,400);
-
 </script>
 
 </body>
