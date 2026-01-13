@@ -5,6 +5,7 @@
 
 <style>
 body {
+  margin: 0;
   background: repeating-linear-gradient(
     45deg,
     #ffe4f1,
@@ -16,117 +17,88 @@ body {
   font-family: Tahoma, Verdana, sans-serif;
 }
 
+/* page wrapper so stickers don’t drift */
+#page {
+  position: relative;
+  min-height: 2000px;
+}
+
+/* links */
 a {
   color: #ff77b7;
   text-decoration: none;
 }
-
 a:hover {
   color: #ff4fa0;
   text-decoration: underline;
 }
 
-table {
-  border-color: #ff9acb;
-  background: #fff6fb;
-}
-
-hr {
-  border: none;
-  border-top: 1px solid #ff9acb;
-}
-
-h1, h2, h3 {
-  color: #ff5fa2;
-}
-}
-}
-
-/* pastel AIM status */
-#aimStatus {
-  font-size: 16px;
-}
-
-.status-red {
-  transition: color 0.3s ease;
-}
-
-/* STICKERS */
+/* stickers */
 .sticker {
   position: absolute;
   pointer-events: none;
+  z-index: 10;
 }
-
 .sticker img {
   width: 80px;
   opacity: 0.9;
 }
 
-/* random positions */
-.s1 { top: 40px; left: 30px; }
-.s2 { top: 120px; right: 60px; }
-.s3 { bottom: 100px; left: 80px; }
-.s4 { bottom: 40px; right: 120px; }
-  .s5 {top: 70px; left:50px; }
+/* fixed positions */
+.s1 { top: 60px; left: 40px; }
+.s2 { top: 140px; right: 80px; }
+.s3 { top: 450px; left: 60px; }
+.s4 { top: 520px; right: 100px; }
+.s5 { top: 300px; left: 50%; transform: translateX(-50%); }
+.s6 { top: 780px; left: 90px; }
+.s7 { top: 820px; right: 140px; }
 
+/* main tables */
+table {
+  border-color: #ff9acb;
+  background: #fff6fb;
+}
+
+h1, h2, h3 {
+  color: #ff5fa2;
+}
+
+/* about me wrapper for parasite sticker */
+#about-wrap {
+  position: relative;
+}
+
+/* sticker sitting ON the about box */
+.about-sticker {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  z-index: 20;
+}
+.about-sticker img {
+  width: 90px;
+}
 </style>
 </head>
 
 <body>
+<div id="page">
 
 <!-- STICKERS -->
 <div class="sticker s1"><img src="REI.png"></div>
 <div class="sticker s2"><img src="HEART.gif"></div>
 <div class="sticker s3"><img src="STRAWBERRIES.gif"></div>
 <div class="sticker s4"><img src="SHORTCAKE.gif"></div>
-  <div class="sticker s5"><img src="SIGH.gif"></div>
-  <div class="sticker s6"><img src="MADOKA.gif"></div>
-  <div class="sticker s7"><img src="BLUESWIRL.gif"></div>
-  <div class="sticker s8"><img src="IDKPINK.gif"></div>
+<div class="sticker s5"><img src="SIGH.gif"></div>
+<div class="sticker s6"><img src="MADOKA.gif"></div>
+<div class="sticker s7"><img src="BLUESWIRL.gif"></div>
 
 <table width="700" align="center" border="1" cellpadding="10">
-<tr>
-<td>
+<tr><td>
 
-<div class="gif-banner">
-  <img src="RAH.jpeg">
-</div>
+<img src="RAH.jpeg" width="100%">
 
 <h1>GUTEN MORGEN, LEUTE!</h1>
-
-<div id="aimStatus">
-  <b>MLYST's</b> <span style="color:#ff5fa2;">internet diary</span><br>
-  <span id="statusText" class="status-red"></span>
-</div>
-
-<script>
-const statuses = [
-  "★ he who is rich is contented",
-  "★ do not compare yourself to others. if you do so, you are insulting yourself",
-  "★ the rotten soul yearns for an automatic",
-  "★ #theywillnevergetridofme"
-];
-
-const reds = [
-  "##426363,
-  "#ff4fa0",
-  "##8c5f9c",
-  "#82ba73",
-  "#ff82b6"
-];
-
-let index = 0;
-const statusEl = document.getElementById("statusText");
-
-function updateStatus() {
-  statusEl.textContent = statuses[index];
-  statusEl.style.color = reds[Math.floor(Math.random() * reds.length)];
-  index = (index + 1) % statuses.length;
-}
-
-updateStatus();
-setInterval(updateStatus, 1400);
-</script>
 
 <p><b>last updated:</b> 12/1/2026</p>
 
@@ -151,84 +123,57 @@ don't like, don't stay
 
 <h3>extra</h3>
 <ul>
-  </a></li>
   <li><a href="friends.html">friends</a></li>
 </ul>
 
-</td>
-</tr>
+</td></tr>
 </table>
 
 <br><br>
 
-<!-- ABOUT ME PAGE BELOW -->
+<!-- ABOUT ME -->
+<div id="about-wrap">
 
-<style>
-.title-bar {
-  background: #ff9acb;
-  color: #ffffff;
-  border-bottom: 1px solid #ff4fa0;
-}
-
-.profile-table td {
-  border-bottom: 1px solid #ffd1e6;
-}
-
-b {
-  color: #ff5fa2;
-}
-
-.quote {
-  color: #a0527c;
-  font-style: italic;
-}
-
-img {
-  border: 1px solid #ff9acb;
-}
-</style>
+<!-- parasite sticker -->
+<div class="about-sticker">
+  <img src="IDKPINK.gif">
+</div>
 
 <table width="700" align="center" border="1" cellpadding="8">
+<tr><td>
+
+<h2>ABOUT ME</h2>
+
+<table width="100%">
 <tr>
 <td>
-
-<table width="100%" cellpadding="4" class="title-bar">
-<tr>
-<td><b>ABOUT ME</b></td>
-</tr>
-</table>
-
-<br>
-
-<table width="100%" border="0">
-<tr>
-<td valign="top">
-<h2>Profile for:<br><b>MLYST</b></h2>
+<h3>Profile for: MLYST</h3>
 </td>
-
-<td valign="top" align="right">
+<td align="right">
 <img src="MLYST.jpeg" width="130">
 </td>
 </tr>
 </table>
 
-<table width="100%" border="0" cellpadding="4" class="profile-table">
-<tr><td width="150"><b>Member Name:</b></td><td>DAMIA</td></tr>
+<table width="100%" cellpadding="4">
+<tr><td><b>Name:</b></td><td>DAMIA</td></tr>
 <tr><td><b>Location:</b></td><td>somewhere unfortunate</td></tr>
 <tr><td><b>Birthdate:</b></td><td>16/06</td></tr>
 <tr><td><b>Sex:</b></td><td>alicorn</td></tr>
 <tr><td><b>Marital Status:</b></td><td>take a wild guess</td></tr>
-<tr><td><b>Hobbies:</b></td><td>drawing, reading, watching movies and playing dress up games</td></tr>
+<tr><td><b>Hobbies:</b></td><td>drawing, reading, movies, dress up games</td></tr>
 <tr><td><b>Occupation:</b></td><td>student</td></tr>
 <tr>
-<td valign="top"><b>Personal Quote:</b></td>
-<td class="quote">“isn't america supposed to be the land of the free? how come, if i'm free, i can't deprive a stupid fucking dumbshit from his posessions if he leaves them sitting in the front seat of his fucking van out in plain sight out and in the middle of fucking nowhere on a fri-fucking-day night. NATURAL SELECTION. fucker should be shot!”</td>
+<td><b>Quote:</b></td>
+<td><i>“isn't america supposed to be the land of the free…”</i></td>
 </tr>
 </table>
 
-</td>
-</tr>
+</td></tr>
 </table>
 
+</div>
+
+</div>
 </body>
 </html>
