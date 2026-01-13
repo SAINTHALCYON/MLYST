@@ -10,75 +10,50 @@ body{
   font-family:Tahoma, Verdana;
   margin:0;
   color:#faa0c0;
-  position:relative;
 }
 
-/* window */
 #window{
   width:800px;
   margin:40px auto;
   background:#e8f3ff;
   border:4px ridge #9fc6ff;
-  position:relative;
-  z-index:2;
 }
 
-/* title bar */
 #titlebar{
   background:linear-gradient(to right,#b8d9ff,#fbc0e6);
   color:#faa0c0;
   padding:6px;
-  font-size:14px;
   font-weight:bold;
 }
 
-/* layout */
 #app{
   display:flex;
   padding:6px;
   gap:6px;
 }
 
-/* left sidebar */
 #left{
   width:220px;
   background:#fff0fa;
   border:2px inset #ffaad5;
   padding:6px;
-  color:#fef0f5;
-  display:flex;
-  flex-direction:column;
 }
 
-/* main list */
 #main{
   flex:1;
   background:#f7fbff;
   border:2px inset #a5c8ff;
   padding:6px;
-  color:#fef0f5;
 }
 
-/* friend card */
 .friend{
   background:linear-gradient(#fff,#ffe7f6);
   border:1px solid #ff9ecb;
   margin-bottom:6px;
-  padding:5px;
-  display:flex;
-  align-items:center;
-  color:#f6d8e6;
+  padding:6px;
+  color:#ff77aa;
 }
 
-.friend img{
-  width:40px;
-  height:40px;
-  margin-right:6px;
-  border-radius:6px;
-  border:1px solid #aaa;
-}
-
-/* buttons */
 .button{
   background:#ff99cc;
   border:1px solid #ff7fbf;
@@ -86,75 +61,50 @@ body{
   text-align:center;
   margin-top:10px;
   border-radius:4px;
+  cursor:pointer;
 }
 
 .button a{
-  color:#fef0f5;
+  color:#fff;
   text-decoration:none;
 }
 
-.button:hover{
-  background:#ff77aa;
-}
-
-/* music player */
 #player{
   background:#e8f3ff;
   border:1px solid #a5c8ff;
   padding:6px;
   margin-bottom:10px;
   text-align:center;
-  color:#fef0f5;
 }
 
-#player audio{
-  width:100%;
-  display:block;
-  margin-top:4px;
+#playBtn{
+  background:#ff99cc;
+  color:#fff;
+  padding:6px;
+  margin-top:6px;
+  border-radius:4px;
+  border:1px solid #ff7fbf;
+  cursor:pointer;
 }
-
-/* vertical banners */
-#banner-left, #banner-right {
-  position:fixed;
-  top:20px;
-  width:80px;
-  height:calc(100% - 40px);
-  background-size:cover;
-  background-repeat:no-repeat;
-  border:2px solid #ff99cc;
-  z-index:1;
-}
-
-#banner-left { left:20px; background-image:url('https://i.imgur.com/your-left-banner.png'); }
-#banner-right { right:20px; background-image:url('https://i.imgur.com/your-right-banner.png'); }
-
 </style>
 </head>
 
 <body>
 
-<!-- vertical banners -->
-<div id="banner-left"></div>
-<div id="banner-right"></div>
-
 <div id="window">
-
-<div id="titlebar">
-✿ my friends list ✿
-</div>
+<div id="titlebar">✿ my friends list ✿</div>
 
 <div id="app">
 
-<!-- LEFT SIDE -->
 <div id="left">
 
 <div id="player">
 🎵 now playing<br>
-<small>don't forget her</small><br>
-<audio controls autoplay loop>
-  <source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Kevin_MacLeod/Jazz_Sampler/Kevin_MacLeod_-_Carefree.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
+<small>your youtube song</small>
+
+<div id="yt"></div>
+
+<div id="playBtn">▶ play</div>
 </div>
 
 <div class="button">
@@ -163,37 +113,52 @@ body{
 
 </div>
 
-<!-- FRIENDS LIST -->
 <div id="main">
-
-<div class="friend">
-<div>wyatt ♡<br><small>online friend</small></div>
-</div>
-
-<div class="friend">
-<div>nat ✿<br><small>irl friend :3 </small></div>
-</div>
-
-<div class="friend">
-<div>uzbek ☆<br><small>online friend :3</small></div>
-</div>
-
-<div class="friend">
-<div>moodle ♡<br><small>online friend</small></div>
-</div>
-
-<div class="friend">
-<div>frank ✿<br><small>online friend</small></div>
-</div>
-
-  <div class="friend">
-    <div>crunch ☆<br><small>online friend</small></div>
-  </div>
-
+  <div class="friend">wyatt ♡<br><small>online friend</small></div>
+  <div class="friend">nat ✿<br><small>irl friend :3</small></div>
+  <div class="friend">uzbek ☆<br><small>online friend</small></div>
+  <div class="friend">moodle ♡<br><small>online friend</small></div>
+  <div class="friend">frank ✿<br><small>online friend</small></div>
+  <div class="friend">crunch ☆<br><small>online friend</small></div>
 </div>
 
 </div>
 </div>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+
+<script>
+let player;
+let playing = false;
+const videoId = "q1RrwH0kyxM";   // from https://youtu.be/q1RrwH0kyxM&list=RDq1RrwH0kyxM&start_radio=1
+
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('yt', {
+    height: '0',
+    width: '0',
+    videoId: videoId,
+    playerVars: {
+      autoplay: 0,
+      loop: 1,
+      playlist: videoId
+    }
+  });
+}
+
+document.getElementById("playBtn").onclick = () => {
+  if (!player) return;
+
+  if (playing) {
+    player.pauseVideo();
+    document.getElementById("playBtn").textContent = "▶ play";
+    playing = false;
+  } else {
+    player.playVideo();
+    document.getElementById("playBtn").textContent = "▐▐ pause";
+    playing = true;
+  }
+};
+</script>
 
 </body>
 </html>
