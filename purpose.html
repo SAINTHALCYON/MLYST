@@ -1,5 +1,4 @@
-
-<!DOCTYPE html><!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <title>purpose</title>
@@ -77,15 +76,8 @@ a:hover { text-decoration:underline; }
   border:2px dotted #ff66aa;
 }
 
-h1 {
-  font-size:16px;
-  color:#ff3399;
-}
-
-p {
-  font-size:12px;
-  color:#333;
-}
+h1 { font-size:16px; color:#ff3399; }
+p { font-size:12px; color:#333; }
 
 #music-player {
   margin-top:10px;
@@ -120,61 +112,67 @@ p {
 
 <div id="wrap">
 
-<!-- SIDEBAR -->
 <div id="sidebar">
 <div class="box">
 <h3>pages</h3>
 <div class="nav"><a href="index.html">back to homepage!</a></div>
 <div class="nav"><a href="fawn.html">friends and whatnot</a></div>
-<div class="nav"><a href="#room">my room</a></div>
+<div class="nav"><a href="friends.html">friendslist</a></div>
 </div>
 </div>
 
-<!-- MAIN -->
 <div id="main">
 
-<a name="home"></a>
 <img class="sticker" src="https://i.pinimg.com/736x/5b/08/e6/5b08e60891be0ea4d32f778a5326e8d6.jpg">
 <h1>purpose — 01/12/26</h1>
-<p>hey everypony.. as you can see, this website is a rework of my old one because it was too edgy to my own liking. i'll try to be consistent woth my updates now since my father lets me use his laptop.</p>
-<p>the entire purpose of this website is just basically a journal for myself. i don't expect anyone to read this unless i've killed myself, done something vile, or made myself an enemy. (i think you can fuck up if it's the latter.) one of the reasons why i made this website is because i'm constantly getting banned off social media platforms. freedom of speech, they say. i guess it only applies to certain (((people))).. other than that, i just got motivated to do this from reading eric harris's AOL blogs(?) i'll definitely dedicate an entry for him soon. i really like him to the point where it'll be insufferable to discuss about him face to face because i'll be babbling nonstop. the things i might write on this blog would probably contradict the theme. i'm not trying to be those brainlet foids who claim harm and like hello kitty. it's just my contrasting aesthetic preference and mentality. i'm trying to tone down my aggressive personality, anyway!</p>
-<p>that's all i need to clarify about this website. thanks for reading, stranger ^_^</p>
 
-<!-- MUSIC PLAYER -->
+<p>hey everypony.. as you can see, this website is a rework of my old one because it was too edgy to my own liking i'll try to be consistent woth my updates now since my father lets me use his laptop.</p> <p>the entire purpose of this website is just basically a journal for myself. i don't expect anyone to read this unless i've killed myself, done something vile, or made myself an enemy. (i think you can fuck up if it's the latter.) one of the reasons why i made this website is because i'm constantly getting banned off social media platforms. freedom of speech, they say. i guess it only applies to certain (((people))).. other than that, i just got motivated to do this from reading eric harris's AOL blogs(?) i'll definitely dedicate an entry for him soon. i really like him to the point where it'll be insufferable to discuss about him face to face because i'll be babbling nonstop. the things i might write on this blog would probably contradict the theme. i'm not trying to be those brainlet foids who claim harm and like hello kitty. it's just my contrasting aesthetic preference and mentality. i'm trying to tone down my aggressive personality, anyway!</p> 
+  <p>that's all i need to clarify about this website. thanks for reading, stranger ^_^</p>.</p>
 <div id="music-player">
-  <audio id="audio" src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Kevin_MacLeod/Jazz_Sampler/Kevin_MacLeod_-_Carefree.mp3"></audio>
-  <div class="controls">
-    <button id="play">▶</button>
-  </div>
+  <div id="yt"></div>
+  <button id="play">▶</button>
   <div id="pause-text">listen to me!!</div>
 </div>
 
+</div>
+</div>
+</div>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+
 <script>
-const audio = document.getElementById("audio");
-const playBtn = document.getElementById("play");
-const pauseText = document.getElementById("pause-text");
+let player;
+let playing = false;
+const videoId = "MwC6WxkCxO0&list=RDMwC6WxkCxO0&start_radio=1";
 
-playBtn.addEventListener("click", () => {
-  if (audio.paused) {
-    audio.play();
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('yt', {
+    height: '0',
+    width: '0',
+    videoId: videoId,
+    playerVars: {
+      loop: 1,
+      playlist: videoId
+    }
+  });
+}
+
+document.getElementById("play").onclick = () => {
+  if (!player) return;
+
+  if (playing) {
+    player.pauseVideo();
+    document.getElementById("play").textContent = "▶";
+    document.getElementById("pause-text").style.display = "block";
+    playing = false;
   } else {
-    audio.pause();
+    player.playVideo();
+    document.getElementById("play").textContent = "▐▐";
+    document.getElementById("pause-text").style.display = "none";
+    playing = true;
   }
-});
-
-audio.addEventListener("play", () => {
-  playBtn.textContent = "▐▐";
-  pauseText.style.display = "none";
-});
-
-audio.addEventListener("pause", () => {
-  playBtn.textContent = "▶";
-  pauseText.style.display = "block";
-});
+};
 </script>
 
-</div> <!-- end main -->
-</div> <!-- end wrap -->
-</div> <!-- end frame -->
 </body>
 </html>
