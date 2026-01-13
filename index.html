@@ -1,196 +1,258 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 <head>
-<title>sainthalcyon</title>
+<title>SAINTHALCYON</title>
 
 <style>
-body {
-  background: repeating-linear-gradient(
-    45deg,
-    #ffe4f1,
-    #ffe4f1 12px,
-    #fff1f8 12px,
-    #fff1f8 24px
-  );
-  color: #6b3355;
-  font-family: Tahoma, Verdana, sans-serif;
+body{
+background:url("https://i.pinimg.com/originals/2c/17/c3/2c17c35051314624349f4fa57794a91f.gif");
+font-family:Verdana, Arial;
+color:#444;
 }
 
-a {
-  color: #ff77b7;
-  text-decoration: none;
+.page{
+width:1000px;
+margin:auto;
+background:#fff;
+border:4px double pink;
+box-shadow:0 0 15px pink;
+position:relative;
 }
 
-a:hover {
-  color: #ff4fa0;
-  text-decoration: underline;
-}
-
-table {
-  border-color: #ff9acb;
-  background: #fff6fb;
-}
-
-hr {
-  border: none;
-  border-top: 1px solid #ff9acb;
-}
-
-h1, h2, h3 {
-  color: #ff5fa2;
-}
-  
-#aimStatus {
-  font-size: 16px;
-}
-
-.status-red {
-  transition: color 0.3s ease;
+/* TOP BANNER */
+.header img{
+width:100%;
+border-bottom:4px dashed pink;
 }
 
 /* STICKERS */
-.sticker {
-  position: absolute;
-  pointer-events: none;
+.sticker{
+position:absolute;
+width:80px;
+z-index:5;
 }
 
-.sticker img {
-  width: 80px;
-  opacity: 0.9;
-}
-.s1 { top: 40px; left: 30px; }
-.s2 { top: 120px; right: 60px; }
-.s3 { bottom: 100px; left: 80px; }
-.s4 { bottom: 40px; right: 120px; }
-  .s5 {top: 70px; left:50px; }
-.s6 { top: 200px; left: 200px; }
-.s7 { top: 350px; right: 150px; }
-.s8 { top: 900px; right: 80px; }
-  
-.about-wrap {
-  position: relative;
+.s1{top:40px;left:-30px;}
+.s2{top:220px;right:-30px;}
+.s3{top:460px;left:-25px;}
+.s4{top:700px;right:-25px;}
+.s5{top:1000px;left:-25px;}
+.s6{top:300px;left:760px;}
+.s7{top:600px;left:620px;}
+.s8{top:880px;left:740px;}
+.s9{top:1180px;left:520px;}
+
+.content{
+display:flex;
+padding:10px;
 }
 
-.about-sticker {
-  position: absolute;
-  top: -35px;
-  right: -35px;
-  z-index: 20;
+/* LEFT */
+.left{
+width:200px;
 }
 
+.box{
+background:#fff0f7;
+border:3px ridge #ff9fcf;
+padding:10px;
+margin-bottom:10px;
+text-align:center;
+}
+
+/* CENTER */
+.center{
+width:550px;
+margin:0 10px;
+}
+
+.mainbox{
+background:linear-gradient(#fff,#ffe6f2);
+border:3px groove pink;
+padding:15px;
+}
+
+.innerbanner{
+width:100%;
+margin-bottom:8px;
+border:2px dotted pink;
+border-radius:6px;
+}
+
+h1{
+font-family:Comic Sans MS;
+color:#ff69b4;
+text-shadow:1px 1px white;
+margin:5px 0;
+}
+
+.subtitle{
+font-size:12px;
+color:#999;
+}
+
+.welcome{
+background:#ffd6eb;
+border:2px dotted pink;
+padding:6px;
+margin:10px 0;
+}
+
+button{
+background:#bdf0ff;
+border:2px solid #6ac7ff;
+border-radius:8px;
+cursor:pointer;
+}
+
+.bulletin,.about{
+background:#fff;
+border:3px dashed #ff9fcf;
+padding:10px;
+margin-top:10px;
+}
+
+/* RIGHT */
+.right{
+width:200px;
+}
+
+.navbox{
+background:#fff0f7;
+border:3px ridge pink;
+padding:10px;
+display:flex;
+flex-direction:column;
+}
+
+.navbox a{
+color:#6b6bff;
+text-decoration:none;
+margin:3px 0;
+font-weight:bold;
+}
+
+.navbox a:hover{
+background:#ffd6eb;
+}
+
+/* FOOTER */
+.footer{
+text-align:center;
+font-size:11px;
+padding:10px;
+color:#aaa;
+}
 </style>
 </head>
 
 <body>
 
+<div class="page">
+
 <!-- STICKERS -->
-<div class="sticker s1"><img src="REI.png"></div>
-<div class="sticker s2"><img src="HEART.gif"></div>
-<div class="sticker s3"><img src="STRAWBERRIES.gif"></div>
-<div class="sticker s4"><img src="SHORTCAKE.gif"></div>
-  <div class="sticker s5"><img src="SIGH.gif"></div>
-  <div class="sticker s6"><img src="MADOKA.gif"></div>
-  <div class="sticker s7"><img src="BLUESWIRL.gif"></div>
-  <div class="sticker s8"><img src="IDKPINK.gif"></div>
+<img src="BLUESWIRL.gif" class="sticker s1">
+<img src="HEART.gif" class="sticker s2">
+<img src="IDKPINK.gif" class="sticker s3">
+<img src="MADOKA.gif" class="sticker s4">
+<img src="REI.jpeg" class="sticker s5">
+<img src="SHORTCAKE.gif" class="sticker s6">
+<img src="SIGH.gif" class="sticker s7">
+<img src="STRAWBERRIES.gif" class="sticker s8">
+<img src="images/sticker9.png" class="sticker s9">
 
-<table width="700" align="center" border="1" cellpadding="10">
-<tr>
-<td>
-
-<div class="gif-banner">
-  <img src="RAH.jpeg">
+<!-- TOP HEADER -->
+<div class="header">
+<img src="images/banner.png">
 </div>
 
-<h1>GUTEN MORGEN, LEUTE!</h1>
+<div class="content">
 
-<div id="aimStatus">
-  <b>MLYST's</b> <span style="color:#ff5fa2;">internet diary</span><br>
-  <span id="statusText" class="status-red"></span>
+<!-- LEFT -->
+<div class="left">
+<div class="box">
+<img src="images/profile.png" width="120"><br>
+<b>A Love Message</b><br>
+Welcome to Swirl!
 </div>
 
-<script>
-const statuses = [
-  "★ he who is rich is contented",
-  "★ do not compare yourself to others. if you do so, you are insulting yourself",
-  "★ the rotten soul yearns for an automatic",
-  "★ #theywillnevergetridofme"
-];
+<div class="box">
+<img src="images/extra1.png" width="150">
+</div>
+</div>
 
-const reds = [
-  "#426363,
-  "#ff4fa0",
-  "##8c5f9c",
-  "#82ba73",
-  "#ff82b6"
-];
+<!-- CENTER -->
+<div class="center">
 
-let index = 0;
-const statusEl = document.getElementById("statusText");
+<div class="mainbox">
 
-function updateStatus() {
-  statusEl.textContent = statuses[index];
-  statusEl.style.color = reds[Math.floor(Math.random() * reds.length)];
-  index = (index + 1) % statuses.length;
-}
+<img src="images/innerbanner.png" class="innerbanner">
 
-updateStatus();
-setInterval(updateStatus, 1400);
-</script>
+<h1>Swirl</h1>
+<div class="subtitle">SWIRL is alive and breathing</div>
 
-<p><b>last updated:</b> 12/1/2026</p>
-
-<hr>
+<div class="welcome">
+Welcome to SWIRL! Would you like some tea?
+</div>
 
 <p>
-this is my personal page<br>
-i write rants here<br>
-i post things i like<br>
-don't like, don't stay
+SWIRL is my internet blog; my digital garden blooming with artistic inspiration...
+<a href="#">read more</a>
 </p>
 
+<button>👏 clap</button>
+
+</div>
+
+<div class="bulletin">
+<b>Celine's Bulletin Board</b><br>
+1:19 AM 7/26/2023<br><br>
+i came back from italy and oh my gosh!!
+</div>
+
+<div class="about">
+<b>Who is Celine?</b><br>
+the person behind this site is me, celine...
+<a href="#">read more</a>
+</div>
+
+</div>
+
+<!-- RIGHT -->
+<div class="right">
+<div class="navbox">
+<a href="#">Home</a>
+<a href="#">Information</a>
+<a href="#">Q&A</a>
+<a href="#">Newsletter</a>
+<a href="#">Room Map</a>
+<a href="#">Site Archive</a>
+<a href="#">Weblinks</a>
+<a href="#">88x31 Buttons</a>
+
 <hr>
 
-<h3>entries</h3>
-<ul>
-  <li><a href="purpose.html">001 - purpose</a></li>
-  <li><a href="fawn.html">002 - friends and whatnot</a></li>
-</ul>
+<a href="#">The Blog</a>
+<a href="#">Profile</a>
+<a href="#">Microblog</a>
+<a href="#">Gamelog</a>
+<a href="#">Aquarium</a>
+<a href="#">Art Room</a>
+<a href="#">Collections</a>
+<a href="#">Shrines</a>
+<a href="#">Media</a>
+<a href="#">Graphics</a>
+<a href="#">Toybox</a>
+</div>
+</div>
 
-<hr>
+</div>
 
-<h3>extra</h3>
-<ul>
-  </a></li>
-  <li><a href="friends.html">friends</a></li>
-</ul>
+<div class="footer">
+© 2026 Swirl Blog — Made with love ♡
+</div>
 
-</td>
-</tr>
-</table>
+</div>
 
-<br><br>
-
-<style>
-.title-bar {
-  background: #ff9acb;
-  color: #ffc5d3;
-  border-bottom: 1px solid #ff4fa0;
-}
-
-.profile-table td {
-  border-bottom: 1px solid #ffd1e6;
-}
-
-b {
-  color: #ff5fa2;
-}
-
-.quote {
-  color: #a0527c;
-  font-style: italic;
-}
-
-img {
-  border: 1px solid #ff9acb;
-}
-</style>
+</body>
+</html>
