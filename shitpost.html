@@ -9,8 +9,6 @@ background:url("http://i.pinimg.com/originals/37/57/69/375769fbabdd2bd333b409eec
 background-size:cover;
 font-family:Verdana, Arial;
 color:#6a4a5a;
-word-wrap:break-word;
-overflow-wrap:break-word;
 }
 
 .container{
@@ -20,9 +18,9 @@ background:#ffeaf4;
 border:5px double #f5a3c7;
 padding:12px;
 display:grid;
-grid-template-columns: 200px 1fr 150px;
+grid-template-columns: 220px 1fr 170px;
 gap:12px;
-box-shadow:0 0 20px #ffcde3;
+box-shadow:0 0 25px #ffcde3;
 }
 
 /* SIDEBAR 1 */
@@ -31,12 +29,7 @@ background:#fff0f7;
 border:2px solid #f3b3d3;
 padding:10px;
 font-size:13px;
-}
-
-.sidebar1 img{
-width:100%;
-border-radius:6px;
-border:2px solid #f3b3d3;
+overflow:hidden;
 }
 
 .sidebar1 b{
@@ -48,12 +41,20 @@ display:block;
 color:#c95c93;
 text-decoration:none;
 margin:5px 0;
-word-break:break-word;
+word-wrap:break-word;
 }
 
 .sidebar1 a:hover{
 color:#ff79b0;
 text-decoration:underline;
+}
+
+.sidebar1 img{
+width:100%;
+height:auto;
+border:2px solid #f3b3d3;
+margin-top:6px;
+border-radius:6px;
 }
 
 /* SIDEBAR 2 */
@@ -64,29 +65,30 @@ padding:10px;
 font-size:12px;
 line-height:1.6;
 color:#7a3b77;
-word-break:break-word;
+overflow:hidden;
+word-wrap:break-word;
 }
 
 /* MAIN */
 .main{
 background:#fff7fb;
 border:2px solid #f3b3d3;
-padding:10px;
+padding:12px;
 overflow:hidden;
 }
 
 /* TOP AREA */
 .topbox{
 display:flex;
-gap:10px;
-margin-bottom:10px;
+gap:12px;
+margin-bottom:12px;
 align-items:flex-start;
 }
 
 .topbox img{
-width:130px;
-height:130px;
-object-fit:cover;
+width:160px;
+height:160px;
+object-fit:contain;
 border:2px solid #f3b3d3;
 background:white;
 border-radius:6px;
@@ -96,40 +98,28 @@ border-radius:6px;
 .box{
 background:#fff0f8;
 border:2px solid #f3b3d3;
-padding:8px;
-margin-bottom:10px;
+padding:10px;
+margin-bottom:12px;
 font-size:13px;
-word-break:break-word;
+word-wrap:break-word;
+box-shadow:0 0 10px #ffd6eb;
 }
 
 /* IMAGE GRID */
 .imagegrid{
 display:grid;
 grid-template-columns: repeat(2,1fr);
-gap:6px;
+gap:10px;
 }
 
 .imagegrid img{
 width:100%;
-height:150px;
-object-fit:cover;
+height:220px;
+object-fit:contain;
 border:2px solid #f3b3d3;
 background:white;
 border-radius:6px;
-}
-
-/* SMALL IMG STRIPS */
-.strip{
-display:flex;
-gap:6px;
-}
-
-.strip img{
-width:60px;
-height:60px;
-object-fit:cover;
-border:2px solid #f3b3d3;
-border-radius:6px;
+padding:4px;
 }
 
 /* FOOTER */
@@ -137,7 +127,7 @@ border-radius:6px;
 text-align:center;
 font-size:11px;
 color:#c08aa5;
-margin-top:10px;
+margin-top:12px;
 }
 </style>
 </head>
@@ -152,7 +142,7 @@ margin-top:10px;
 <hr>
 <a href="index.html">back to homepage!</a>
 <a href="blog.html">test</a>
-<a href=".html">test</a>
+<a href="#">test</a>
 <a href="gallery.html">test</a>
 <a href="chat.html">test</a>
 <a href="guestbook.html">test</a>
@@ -172,7 +162,8 @@ margin-top:10px;
 <img src="https://soyjakwiki.org/images/9/9e/Impjak.png">
 <div class="box">
 <b>i fucking love swede</b><br>
-i wanna make a plushie of xim xe's so cute HSHSJACDWHJAJKSH FUCK <br> swede looks funny and qt. i also edited the phot of swede getting hugged ^_^
+i wanna make a plushie of xim xe's so cute HSHSJACDWHJAJKSH FUCK <br>
+swede looks funny and qt. i also edited the photo of swede getting hugged ^_^
 </div>
 </div>
 
