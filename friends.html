@@ -9,7 +9,7 @@ body{
   background:url("http://i.pinimg.com/1200x/b4/0e/ad/b40ead081804ce1887e13ba2fc1562ed.jpg");
   font-family:Tahoma, Verdana;
   margin:0;
-  color:#faa0c0;
+  color:#ff8fba;
 }
 
 #window{
@@ -17,13 +17,15 @@ body{
   margin:40px auto;
   background:#e8f3ff;
   border:4px ridge #9fc6ff;
+  box-shadow:0 0 20px #cfe3ff, 0 0 30px #ffd1eb;
 }
 
 #titlebar{
   background:linear-gradient(to right,#b8d9ff,#fbc0e6);
-  color:#faa0c0;
+  color:#ff7fbf;
   padding:6px;
   font-weight:bold;
+  text-shadow:0 0 5px #fff;
 }
 
 #app{
@@ -32,28 +34,35 @@ body{
   gap:6px;
 }
 
+/* LEFT PANEL */
 #left{
   width:220px;
   background:#fff0fa;
   border:2px inset #ffaad5;
   padding:6px;
+  box-shadow:0 0 10px #ffd1eb;
 }
 
+/* MAIN PANEL */
 #main{
   flex:1;
   background:#f7fbff;
   border:2px inset #a5c8ff;
   padding:6px;
+  box-shadow:0 0 10px #cfe3ff;
 }
 
+/* FRIEND BOX */
 .friend{
   background:linear-gradient(#fff,#ffe7f6);
   border:1px solid #ff9ecb;
   margin-bottom:6px;
   padding:6px;
   color:#ff77aa;
+  box-shadow:0 0 6px #ffd1eb;
 }
 
+/* BUTTON */
 .button{
   background:#ff99cc;
   border:1px solid #ff7fbf;
@@ -62,19 +71,24 @@ body{
   margin-top:10px;
   border-radius:4px;
   cursor:pointer;
+  box-shadow:0 0 8px #ffb3dd;
 }
 
 .button a{
   color:#fff;
   text-decoration:none;
+  text-shadow:0 0 5px #fff;
 }
 
+/* PLAYER */
 #player{
   background:#e8f3ff;
   border:1px solid #a5c8ff;
   padding:6px;
   margin-bottom:10px;
   text-align:center;
+  color:#ff77aa;
+  box-shadow:0 0 8px #cfe3ff;
 }
 
 #playBtn{
@@ -85,6 +99,12 @@ body{
   border-radius:4px;
   border:1px solid #ff7fbf;
   cursor:pointer;
+  box-shadow:0 0 8px #ffb3dd;
+  text-shadow:0 0 5px #fff;
+}
+
+#playBtn:hover{
+  box-shadow:0 0 12px #ffd1eb, 0 0 20px #ff9ecb;
 }
 </style>
 </head>
@@ -100,7 +120,7 @@ body{
 
 <div id="player">
 🎵 now playing<br>
-<small>mistake</small>
+<small style="color:#ff9ecb;">mistake</small>
 
 <div id="yt"></div>
 
@@ -114,11 +134,11 @@ body{
 </div>
 
 <div id="main">
-  <div class="friend">wyatt ♡<br><small>online</small></div>
-  <div class="friend">nat ✿<br><small>irl</small></div>
-  <div class="friend">uzbek ☆<br><small>online</small></div>
-  <div class="friend">moodle ♡<br><small>online</small></div>
-  <div class="friend">frank ✿<br><small>online</small></div>
+  <div class="friend">wyatt ♡<br><small style="color:#ff9ecb;">online</small></div>
+  <div class="friend">nat ✿<br><small style="color:#ff9ecb;">irl</small></div>
+  <div class="friend">uzbek ☆<br><small style="color:#ff9ecb;">online</small></div>
+  <div class="friend">moodle ♡<br><small style="color:#ff9ecb;">online</small></div>
+  <div class="friend">frank ✿<br><small style="color:#ff9ecb;">online</small></div>
 </div>
 
 </div>
@@ -129,7 +149,7 @@ body{
 <script>
 let player;
 let playing = false;
-const videoId = "q1RrwH0kyxM";   // from https://youtu.be/q1RrwH0kyxM&list=RDq1RrwH0kyxM&start_radio=1
+const videoId = "q1RrwH0kyxM";
 
 function onYouTubeIframeAPIReady() {
   player = new YT.Player('yt', {
