@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <title>sthalcyon</title>
@@ -15,10 +15,11 @@ width:1000px;
 margin:auto;
 background:#fff;
 border:4px double pink;
-box-shadow:0 0 15px pink;
+box-shadow:0 0 25px hotpink;
 position:relative;
 }
 
+/* HEADER */
 .header img{
 width:100%;
 max-height:180px;
@@ -31,6 +32,7 @@ border-bottom:4px dashed pink;
 position:absolute;
 width:80px;
 z-index:5;
+filter:drop-shadow(0 0 6px pink);
 }
 
 .s2{top:220px;right:-30px;}
@@ -42,22 +44,26 @@ z-index:5;
 .s8{top:880px;left:740px;}
 .s9{top:1180px;left:520px;}
 
+/* CONTENT */
 .content{
 display:flex;
 padding:10px;
+align-items:flex-start;
 }
 
 /* LEFT */
-.left{
-width:200px;
-}
+.left{width:200px;}
 
+/* BOX GLOW */
 .box{
 background:#fff0f7;
 border:3px ridge #ff9fcf;
 padding:10px;
 margin-bottom:10px;
 text-align:center;
+box-shadow:
+0 0 6px #ffb3d9,
+0 0 12px #ffd6eb;
 }
 
 /* CENTER */
@@ -70,6 +76,9 @@ margin:0 10px;
 background:linear-gradient(#fff,#ffe6f2);
 border:3px groove pink;
 padding:15px;
+box-shadow:
+0 0 10px pink,
+inset 0 0 6px white;
 }
 
 .innerbanner{
@@ -77,12 +86,13 @@ width:100%;
 margin-bottom:8px;
 border:2px dotted pink;
 border-radius:6px;
+box-shadow:0 0 6px pink;
 }
 
 h1{
 font-family:Comic Sans MS;
 color:#ff69b4;
-text-shadow:1px 1px white;
+text-shadow:0 0 6px pink,1px 1px white;
 margin:5px 0;
 }
 
@@ -96,6 +106,7 @@ background:#ffd6eb;
 border:2px dotted pink;
 padding:6px;
 margin:10px 0;
+box-shadow:0 0 6px #ffb3d9;
 }
 
 button{
@@ -110,12 +121,11 @@ background:#fff;
 border:3px dashed #ff9fcf;
 padding:10px;
 margin-top:10px;
+box-shadow:0 0 8px #ffc1dd;
 }
 
 /* RIGHT */
-.right{
-width:200px;
-}
+.right{width:200px;}
 
 .navbox{
 background:#fff0f7;
@@ -123,17 +133,23 @@ border:3px ridge pink;
 padding:10px;
 display:flex;
 flex-direction:column;
+box-shadow:
+0 0 10px #ffb3d9,
+0 0 20px #ffd6eb;
 }
 
 .navbox a{
 color:#6b6bff;
 text-decoration:none;
-margin:3px 0;
+margin:4px 0;
 font-weight:bold;
+padding:3px;
+border-radius:4px;
 }
 
 .navbox a:hover{
 background:#ffd6eb;
+box-shadow:0 0 8px pink;
 }
 
 /* FOOTER */
@@ -142,6 +158,7 @@ text-align:center;
 font-size:11px;
 padding:10px;
 color:#aaa;
+text-shadow:0 0 5px pink;
 }
 </style>
 </head>
@@ -169,17 +186,19 @@ color:#aaa;
 
 <!-- LEFT -->
 <div class="left">
+
 <div class="box">
 <img src="MLYST.jpeg" width="120"><br>
 <b>MLYST</b><br>
 @mlyst <br>
- @sainthalcyon <br>
- @studiomilitary <br>
+@sainthalcyon <br>
+@studiomilitary <br>
 </div>
 
 <div class="box">
 <img src="HUH.jpeg" width="150">
 </div>
+
 </div>
 
 <!-- CENTER -->
@@ -207,26 +226,25 @@ hello!!! i rant and post the things i like here ^_^ don't like, don't stay! this
 6:35 AM 14/01/2026<br><br>
 chatbox works now! i'm planning to change the domain name
 </div>
-</div>
 
 </div>
 
 <!-- RIGHT -->
 <div class="right">
+
 <div class="navbox">
 <a href="index.html">Home</a>
 <a href="friends.html">Friendslist</a>
- <a href="chatbox.html">Chatbox</a>
-  <a href="shitpost.html">Shitposts</a>
-
-
+<a href="chatbox.html">Chatbox</a>
+<a href="shitpost.html">Shitposts</a>
 
 <hr>
 
-<a href="purpose.html">      001 - Purpose</a>
-<a href="fawn.html">         002 - Friends and whatnot</a>
- <a href="ericharris.html">  003 - Eric Harris</a>
+<a href="purpose.html">001 - Purpose</a>
+<a href="fawn.html">002 - Friends and whatnot</a>
+<a href="ericharris.html">003 - Eric Harris</a>
 </div>
+
 </div>
 
 </div>
