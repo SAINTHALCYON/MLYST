@@ -4,228 +4,502 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SAINTHALCYON'S LOUNGE</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
 <style>
-body {
-  background: #ffd1e5;
-  font-family: 'Press Start 2P', monospace;
-  font-size: 10px;
-  display: flex;
-  justify-content: center;
-  padding: 20px;
-}
+  :root {
+    --bg-color: #ffd1e5;
+    --container-bg: #fff5fb;
+    --border-color: #6b6b6b;
+    --accent-pink: #ff8fab;
+    --text-color: #4a4a4a;
+    --chat-bg: #fffdf7;
+  }
 
-#page {
-  width: 900px;
-  background: #fff5fb;
-  border: 4px solid #6b6b6b;
-  padding: 10px;
-}
+  body {
+    background: var(--bg-color);
+    font-family: 'Press Start 2P', monospace;
+    margin: 0;
+    font-size: 10px;
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    padding-top: 20px;
+  }
 
-#chat-messages {
-  height: 350px;
-  overflow-y: auto;
-  border: 3px double #6b6b6b;
-  padding: 10px;
-  background: #fff;
-}
+  #page {
+    width: 1000px;
+    max-width: 95vw;
+    background: var(--container-bg);
+    border: 4px solid var(--border-color);
+    box-shadow: 8px 8px 0px rgba(0,0,0,0.1);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
 
-.message {
-  border-bottom: 1px dotted #aaa;
-  padding-bottom: 6px;
-  margin-bottom: 6px;
-}
+  #banner {
+    width: 100%;
+    height: 120px;
+    border: 3px double var(--border-color);
+    background: repeating-linear-gradient(
+      45deg,
+      #ffbcd9,
+      #ffbcd9 10px,
+      #ffe3ef 10px,
+      #ffe3ef 20px
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 2px 2px #fff;
+    color: #ff5c8d;
+    font-size: 16px;
+  }
 
-.message-username {
-  color: #ff5c8d;
-  font-size: 9px;
-  display: block;
-}
+  #main-interface {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
 
-.message-time {
-  font-size: 7px;
-  text-align: right;
-  color: #999;
-}
+  #chat-section {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+  }
 
-.message img {
-  width: 100px;
-  height: 100px;
-  image-rendering: pixelated;
-  border: 1px solid #6b6b6b;
-}
+  #chat-messages {
+    flex: 1;
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 10px;
+    border: 3px double var(--border-color);
+    background: var(--chat-bg);
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-pink) var(--chat-bg);
+  }
 
-#canvas-wrapper {
-  margin-top: 10px;
-  width: 220px;
-  height: 220px;
-  border: 3px double #6b6b6b;
-}
+  .message {
+    border-bottom: 1px dotted var(--border-color);
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    line-height: 1.5;
+    word-break: break-word;
+  }
 
-canvas {
-  width: 100%;
-  height: 100%;
-  image-rendering: pixelated;
-}
+  .message-username {
+    color: #ff5c8d;
+    font-size: 9px;
+    margin-bottom: 4px;
+    display: block;
+  }
 
-#chat-input {
-  display: flex;
-  gap: 6px;
-  margin-top: 10px;
-}
+  .message img {
+    width: 100px;
+    height: 100px;
+    image-rendering: pixelated;
+    border: 1px solid var(--border-color);
+    background: #fff;
+  }
 
-input, button {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 9px;
-  padding: 6px;
-}
+  .message-time {
+    font-size: 7px;
+    color: #999;
+    margin-top: 4px;
+    display: block;
+    text-align: right;
+  }
+
+  #draw-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 250px;
+  }
+
+  #canvas-wrapper {
+    position: relative;
+    border: 3px double var(--border-color);
+    width: 220px;
+    height: 220px;
+    background: #fff;
+    background-image:
+      linear-gradient(45deg, #eee 25%, transparent 25%),
+      linear-gradient(-45deg, #eee 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, #eee 75%),
+      linear-gradient(-45deg, transparent 75%, #eee 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    cursor: crosshair;
+  }
+
+  #draw-canvas {
+    width: 100%;
+    height: 100%;
+    image-rendering: pixelated; /* CRITICAL FOR PIXEL LOOK */
+  }
+
+  #controls {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: #fff;
+    padding: 8px;
+    border: 2px solid var(--border-color);
+  }
+
+  #color-palette { display: flex; gap: 6px; flex-wrap: wrap; }
+  
+  .color-swatch {
+    width: 24px;
+    height: 24px;
+    border: 2px solid #ccc;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .color-swatch.active { border-color: #000; transform: scale(1.1); }
+
+  .tools-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 8px;
+  }
+
+  input[type="range"] { accent-color: var(--accent-pink); cursor: pointer; }
+
+  #sticker-container {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    margin-top: 5px;
+    border-top: 1px dotted #ccc;
+    padding-top: 5px;
+  }
+
+  .sticker {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    image-rendering: pixelated;
+    transition: transform 0.1s;
+  }
+  .sticker:hover { transform: translateY(-2px); }
+
+  #chat-input-area {
+    display: flex;
+    gap: 6px;
+    padding-top: 10px;
+    border-top: 3px solid var(--border-color);
+  }
+
+  input {
+    padding: 8px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 9px;
+    border: 2px solid var(--border-color);
+    background: #fff;
+    color: #333;
+  }
+
+  #username { width: 100px; flex-shrink: 0; }
+  #message { flex: 1; }
+
+  button {
+    padding: 8px 10px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 9px;
+    cursor: pointer;
+    background: #ffe3ef;
+    border: 2px solid var(--border-color);
+    color: var(--text-color);
+    box-shadow: 2px 2px 0px var(--border-color);
+    transition: all 0.1s;
+  }
+
+  button:active {
+    transform: translate(2px, 2px);
+    box-shadow: none;
+  }
+
+  button.primary { background: #ff8fab; color: white; }
+
 </style>
 </head>
 
 <body>
 
 <div id="page">
-
-  <div id="chat-messages">
-    <div id="loading">loading…</div>
+  <div id="banner">
   </div>
 
-  <div id="canvas-wrapper">
-    <canvas id="draw" width="55" height="55"></canvas>
+  <div id="main-interface">
+    <div id="chat-section">
+      <div id="chat-messages">
+        <div class="message" id="loading-msg">
+          <span class="message-username">update log:</span>
+          i'm so fucking tired hitler
+          <span class="message-time">Now</span>
+        </div>
+      </div>
+    </div>
+    
+    <div id="draw-section">
+      <div id="canvas-wrapper">
+        <canvas id="draw-canvas" width="55" height="55"></canvas>
+      </div>
+
+      <div id="controls">
+        <div id="color-palette">
+  
+        </div>
+        
+        <div class="tools-row">
+          <label>
+            Pen: <span id="pen-size-display">1</span>px
+            <input type="range" id="pen-size" min="1" max="5" value="1">
+          </label>
+          <button id="clear-btn">CLR</button>
+        </div>
+
+        <div id="sticker-container">
+          <img class="sticker" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5gQWES425Y6w3wAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAOElEQVRYw+3WMQoAIAwDwO7+/zU0E6aA4S04Q5M9O6p7s27s27s27s27s27s27s27s27s27s27s2T4AcL4B9U4B4T4AAAAASUVORK5CYII=" title="Heart">
+          <img class="sticker" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5gQWES425Y6w3wAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAdklEQVRYw+3WsQqAMAwEwU9F+/6sQ0Mq4OaM0D2mZ8D7J3+4d38O2T7pN2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdp92g3+gf8g9O4B9Q0B4j0AAAAASUVORK5CYII=" title="Star">
+          <img class="sticker" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5gQWES425Y6w3wAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAUklEQVRYw+3WMQoAIAwDwO7+/zWw02mM0D6d0D2VZ8PpN3+4d38O2T7pN2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt92h3+A/8Q9e4A9Q4B4z0AAAAASUVORK5CYII=" title="Smile">
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div id="chat-input">
-    <input id="username" placeholder="User" maxlength="20">
-    <input id="message" placeholder="Message" maxlength="100">
-    <button id="send">SEND</button>
-    <button id="send-art">ART</button>
+  <div id="chat-input-area">
+    <input type="text" id="username" placeholder="User" maxlength="20">
+    <input type="text" id="message" placeholder="Type here..." maxlength="100">
+    <button id="send-button" class="primary">SEND</button>
+    <button id="send-draw-button">ART</button>
   </div>
-
 </div>
 
 <script>
-/* ================= FIREBASE ================= */
 
 const firebaseConfig = {
   apiKey: "AIzaSyB8eG54hE9HNmiEhx7ON7JKWpqc3a4R7ns",
   authDomain: "sainthalcyon-87144.firebaseapp.com",
-  databaseURL: "https://sainthalcyon-87144-default-rtdb.firebaseio.com",
   projectId: "sainthalcyon-87144",
-  storageBucket: "sainthalcyon-87144.appspot.com",
+  storageBucket: "sainthalcyon-87144.firebasestorage.app",
   messagingSenderId: "257264228367",
-  appId: "1:257264228367:web:313ffc00542858c0152b7a"
+  appId: "1:257264228367:web:313ffc00542858c0152b7a",
+  measurementId: "G-3Q2C6NL4ZT",
+  databaseURL: "https://sainthalcyon-87144-default-rtdb.firebaseio.com/"
 };
 
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
-const chatRef = db.ref("chat");
+let db = null;
+try {
+  firebase.initializeApp(firebaseConfig);
+  db = firebase.database();
+} catch(e) {
+  console.error("Firebase Init Error:", e);
+  document.getElementById("loading-msg").innerHTML = "Chat Offline (Firebase Error)";
+}
 
-/* ================= UI ================= */
-
-const chatBox = document.getElementById("chat-messages");
-const userInput = document.getElementById("username");
-const msgInput = document.getElementById("message");
-
-/* ================= HELPERS ================= */
+// UI Elements
+const chatMessages = document.getElementById("chat-messages");
+const usernameInput = document.getElementById("username");
+const messageInput = document.getElementById("message");
+const sendButton = document.getElementById("send-button");
+const sendDrawButton = document.getElementById("send-draw-button");
 
 function escapeHtml(text) {
-  return text.replace(/[&<>]/g, c =>
-    ({ "&":"&amp;", "<":"&lt;", ">":"&gt;" }[c])
-  );
+  if (!text) return "";
+  return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
-function addMessage(data) {
-  const el = document.createElement("div");
-  el.className = "message";
-
-  let content = "";
-  if (data.type === "art") {
-    content = `<img src="${data.image}">`;
-  } else {
-    content = escapeHtml(data.message);
-  }
-
-  const time = new Date(data.timestamp || Date.now())
-    .toLocaleTimeString([], {hour:"2-digit", minute:"2-digit"});
-
-  el.innerHTML = `
+function addMessageToUI(data) {
+  const timeStr = data.timestamp ? new Date(data.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : "??";
+  const contentHtml = (data.type === 'art') ? data.message : escapeHtml(data.message);
+  
+  const msgEl = document.createElement("div");
+  msgEl.className = "message";
+  msgEl.innerHTML = `
     <span class="message-username">${escapeHtml(data.username)}</span>
-    <div>${content}</div>
-    <span class="message-time">${time}</span>
+    <div class="message-text">${contentHtml}</div>
+    <span class="message-time">${timeStr}</span>
   `;
-
-  chatBox.appendChild(el);
-  chatBox.scrollTop = chatBox.scrollHeight;
+  
+  chatMessages.appendChild(msgEl);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
-/* ================= SEND ================= */
-
-document.getElementById("send").onclick = () => {
-  const msg = msgInput.value.trim();
-  if (!msg) return;
-
-  chatRef.push({
-    username: userInput.value || "Anon",
-    message: msg,
-    type: "text",
+function sendMessage() {
+  if (!db) return alert("Chat is offline.");
+  const username = usernameInput.value.trim() || "Anon";
+  const message = messageInput.value.trim();
+  if(!message) return;
+  
+  db.ref("chat").push({
+    username, message, type: 'text',
     timestamp: firebase.database.ServerValue.TIMESTAMP
   });
+  messageInput.value = "";
+}
 
-  msgInput.value = "";
-};
-
-document.getElementById("send-art").onclick = () => {
-  const img = canvas.toDataURL("image/png");
-
-  chatRef.push({
-    username: userInput.value || "Anon",
-    image: img,
-    type: "art",
+function sendDrawing() {
+  if (!db) return alert("Chat is offline.");
+  const username = usernameInput.value.trim() || "Anon";
+  const imgData = canvas.toDataURL("image/png");
+  
+  db.ref("chat").push({
+    username,
+    message: `<img src="${imgData}" />`,
+    type: 'art',
     timestamp: firebase.database.ServerValue.TIMESTAMP
   });
-};
+}
 
-/* ================= LISTENER ================= */
+sendButton.addEventListener("click", sendMessage);
+messageInput.addEventListener("keypress", (e) => { if(e.key === 'Enter') sendMessage(); });
+sendDrawButton.addEventListener("click", sendDrawing);
 
-chatRef.limitToLast(50).on("child_added", snap => {
-  document.getElementById("loading")?.remove();
-  addMessage(snap.val());
+if (db) {
+  db.ref("chat").limitToLast(50).on("child_added", snapshot => {
+    const data = snapshot.val();
+    const loading = document.getElementById("loading-msg");
+    if(loading) loading.remove();
+    addMessageToUI(data);
+  });
+}
+
+const canvas = document.getElementById("draw-canvas");
+const ctx = canvas.getContext("2d", { alpha: true });
+
+
+ctx.imageSmoothingEnabled = false; 
+
+
+ctx.fillStyle = "#ffffff";
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+
+let isDrawing = false;
+let currentColor = "#ff8fab";
+let currentSize = 1;
+let lastX = 0;
+let lastY = 0;
+
+const colors = [
+  "#ff8fab", "#ffc6ff", "#bdb2ff", "#caffbf", "#ffd6a5", 
+  "#ff6961", "#ffca3a", "#8ac926", "#1982c4", "#6a4c93",
+  "#ffffff", "#000000"
+];
+
+const paletteContainer = document.getElementById("color-palette");
+colors.forEach((c, index) => {
+  const sw = document.createElement("div");
+  sw.className = "color-swatch";
+  sw.style.background = c;
+  if(index === 0) sw.classList.add('active'); 
+  
+  sw.addEventListener("click", () => {
+    document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
+    sw.classList.add('active');
+    currentColor = c;
+  });
+  paletteContainer.appendChild(sw);
 });
 
-/* ================= CANVAS ================= */
+const sizeInput = document.getElementById("pen-size");
+const sizeDisplay = document.getElementById("pen-size-display");
+sizeInput.addEventListener("input", (e) => {
+  currentSize = parseInt(e.target.value);
+  sizeDisplay.innerText = currentSize;
+});
 
-const canvas = document.getElementById("draw");
-const ctx = canvas.getContext("2d");
-ctx.imageSmoothingEnabled = false;
-ctx.fillStyle = "#fff";
-ctx.fillRect(0,0,55,55);
+document.getElementById("clear-btn").addEventListener("click", () => {
+  ctx.fillStyle = "#ffffff";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+});
 
-let drawing = false;
-
-canvas.onmousedown = e => {
-  drawing = true;
-  draw(e);
-};
-
-window.onmouseup = () => drawing = false;
-
-canvas.onmousemove = e => {
-  if (drawing) draw(e);
-};
-
-function draw(e) {
-  const r = canvas.getBoundingClientRect();
-  const x = Math.floor((e.clientX - r.left) * 55 / r.width);
-  const y = Math.floor((e.clientY - r.top) * 55 / r.height);
-  ctx.fillStyle = "#ff5c8d";
-  ctx.fillRect(x,y,1,1);
+// This fixes the "dotted line" issue when moving mouse fast
+function drawPixel(x, y) {
+  ctx.fillStyle = currentColor;
+  ctx.fillRect(x, y, currentSize, currentSize);
 }
-</script>
 
+// Bresenham's Line Algorithm for perfect pixel lines
+function drawLine(x0, y0, x1, y1) {
+  const dx = Math.abs(x1 - x0);
+  const dy = Math.abs(y1 - y0);
+  const sx = (x0 < x1) ? 1 : -1;
+  const sy = (y0 < y1) ? 1 : -1;
+  let err = dx - dy;
+
+  while(true) {
+    drawPixel(x0, y0);
+    if ((x0 === x1) && (y0 === y1)) break;
+    const e2 = 2 * err;
+    if (e2 > -dy) { err -= dy; x0 += sx; }
+    if (e2 < dx) { err += dx; y0 += sy; }
+  }
+}
+
+function getPos(e) {
+  const rect = canvas.getBoundingClientRect();
+  const scaleX = canvas.width / rect.width;
+  const scaleY = canvas.height / rect.height;
+  
+  // Get raw position
+  let x = (e.clientX - rect.left) * scaleX;
+  let y = (e.clientY - rect.top) * scaleY;
+  
+  // Snap to grid
+  x = Math.floor(x / currentSize) * currentSize;
+  y = Math.floor(y / currentSize) * currentSize;
+  
+  return { x, y };
+}
+
+canvas.addEventListener("mousedown", (e) => {
+  isDrawing = true;
+  const pos = getPos(e);
+  lastX = pos.x;
+  lastY = pos.y;
+  drawPixel(lastX, lastY); // Draw initial dot
+});
+
+window.addEventListener("mouseup", () => { isDrawing = false; });
+
+canvas.addEventListener("mousemove", (e) => {
+  if (!isDrawing) return;
+  const pos = getPos(e);
+  
+  drawLine(lastX, lastY, pos.x, pos.y);
+  
+  // Update last position
+  lastX = pos.x;
+  lastY = pos.y;
+});
+
+document.querySelectorAll(".sticker").forEach(st => {
+  st.addEventListener("click", () => {
+    const img = new Image();
+    img.src = st.src;
+    img.onload = () => {
+      const snap = 5;
+      const x = Math.floor(Math.random() * (canvas.width - 10) / snap) * snap;
+      const y = Math.floor(Math.random() * (canvas.height - 10) / snap) * snap;
+      ctx.drawImage(img, x, y, 10, 10); 
+    };
+  });
+});
+
+</script>
 </body>
 </html>
