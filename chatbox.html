@@ -6,6 +6,7 @@
 <title>SAINTHALCYON'S LOUNGE</title>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
+<!-- Using Compat libraries for easier HTML/JS implementation -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
@@ -144,7 +145,7 @@
   #draw-canvas {
     width: 100%;
     height: 100%;
-    image-rendering: pixelated; /* CRITICAL FOR PIXEL LOOK */
+    image-rendering: pixelated;
   }
 
   #controls {
@@ -247,7 +248,7 @@
       <div id="chat-messages">
         <div class="message" id="loading-msg">
           <span class="message-username">update log:</span>
-          i'm so fucking tired hitler
+          connecting to server...
           <span class="message-time">Now</span>
         </div>
       </div>
@@ -273,8 +274,8 @@
 
         <div id="sticker-container">
           <img class="sticker" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5gQWES425Y6w3wAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAOElEQVRYw+3WMQoAIAwDwO7+/zU0E6aA4S04Q5M9O6p7s27s27s27s27s27s27s27s27s27s27s2T4AcL4B9U4B4T4AAAAASUVORK5CYII=" title="Heart">
-          <img class="sticker" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5gQWES425Y6w3wAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAdklEQVRYw+3WsQqAMAwEwU9F+/6sQ0Mq4OaM0D2mZ8D7J3+4d38O2T7pN2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdp92g3+gf8g9O4B9Q0B4j0AAAAASUVORK5CYII=" title="Star">
-          <img class="sticker" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5gQWES425Y6w3wAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAUklEQVRYw+3WMQoAIAwDwO7+/zWw02mM0D6d0D2VZ8PpN3+4d38O2T7pN2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt92h3+A/8Q9e4A9Q4B4z0AAAAASUVORK5CYII=" title="Smile">
+          <img class="sticker" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5gQWES425Y6w3wAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAUklEQVRYw+3WsQqAMAwEwU9F+/6sQ0Mq4OaM0D2mZ8D7J3+4d38O2T7pN2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt92g3+gf8g9O4B9Q0B4j0AAAAASUVORK5CYII=" title="Star">
+          <img class="sticker" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5gQWES425Y6w3wAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAdklEQVRYw+3WMQoAIAwDwO7+/zWw02mM0D6d0D2VZ8PpN3+4d38O2T7pN2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt92h3+A/8Q9e4A9Q4B4z0AAAAASUVORK5CYII=" title="Smile">
         </div>
       </div>
     </div>
@@ -305,9 +306,11 @@ let db = null;
 try {
   firebase.initializeApp(firebaseConfig);
   db = firebase.database();
+  console.log("Firebase initialized successfully.");
 } catch(e) {
   console.error("Firebase Init Error:", e);
-  document.getElementById("loading-msg").innerHTML = "Chat Offline (Firebase Error)";
+  const loading = document.getElementById("loading-msg");
+  if(loading) loading.innerHTML = "Error: Check Console";
 }
 
 // UI Elements
@@ -344,11 +347,18 @@ function sendMessage() {
   const message = messageInput.value.trim();
   if(!message) return;
   
-  db.ref("chat").push({
+  const chatRef = db.ref("chat");
+  
+  chatRef.push({
     username, message, type: 'text',
     timestamp: firebase.database.ServerValue.TIMESTAMP
+  }, (error) => {
+    if (error) {
+      alert("Send Failed: " + error.message);
+    } else {
+      messageInput.value = "";
+    }
   });
-  messageInput.value = "";
 }
 
 function sendDrawing() {
@@ -356,11 +366,17 @@ function sendDrawing() {
   const username = usernameInput.value.trim() || "Anon";
   const imgData = canvas.toDataURL("image/png");
   
-  db.ref("chat").push({
+  const chatRef = db.ref("chat");
+  
+  chatRef.push({
     username,
     message: `<img src="${imgData}" />`,
     type: 'art',
     timestamp: firebase.database.ServerValue.TIMESTAMP
+  }, (error) => {
+    if (error) {
+      alert("Art Failed: " + error.message);
+    }
   });
 }
 
@@ -380,13 +396,9 @@ if (db) {
 const canvas = document.getElementById("draw-canvas");
 const ctx = canvas.getContext("2d", { alpha: true });
 
-
 ctx.imageSmoothingEnabled = false; 
-
-
 ctx.fillStyle = "#ffffff";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
-
 
 let isDrawing = false;
 let currentColor = "#ff8fab";
@@ -427,13 +439,11 @@ document.getElementById("clear-btn").addEventListener("click", () => {
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 });
 
-// This fixes the "dotted line" issue when moving mouse fast
 function drawPixel(x, y) {
   ctx.fillStyle = currentColor;
   ctx.fillRect(x, y, currentSize, currentSize);
 }
 
-// Bresenham's Line Algorithm for perfect pixel lines
 function drawLine(x0, y0, x1, y1) {
   const dx = Math.abs(x1 - x0);
   const dy = Math.abs(y1 - y0);
@@ -455,11 +465,9 @@ function getPos(e) {
   const scaleX = canvas.width / rect.width;
   const scaleY = canvas.height / rect.height;
   
-  // Get raw position
   let x = (e.clientX - rect.left) * scaleX;
   let y = (e.clientY - rect.top) * scaleY;
   
-  // Snap to grid
   x = Math.floor(x / currentSize) * currentSize;
   y = Math.floor(y / currentSize) * currentSize;
   
@@ -471,7 +479,7 @@ canvas.addEventListener("mousedown", (e) => {
   const pos = getPos(e);
   lastX = pos.x;
   lastY = pos.y;
-  drawPixel(lastX, lastY); // Draw initial dot
+  drawPixel(lastX, lastY);
 });
 
 window.addEventListener("mouseup", () => { isDrawing = false; });
@@ -479,10 +487,7 @@ window.addEventListener("mouseup", () => { isDrawing = false; });
 canvas.addEventListener("mousemove", (e) => {
   if (!isDrawing) return;
   const pos = getPos(e);
-  
   drawLine(lastX, lastY, pos.x, pos.y);
-  
-  // Update last position
   lastX = pos.x;
   lastY = pos.y;
 });
