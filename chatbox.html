@@ -290,7 +290,6 @@
 </div>
 
 <script>
-
 const firebaseConfig = {
   apiKey: "AIzaSyB8eG54hE9HNmiEhx7ON7JKWpqc3a4R7ns",
   authDomain: "sainthalcyon-87144.firebaseapp.com",
@@ -326,19 +325,24 @@ function escapeHtml(text) {
 }
 
 function addMessageToUI(data) {
-  const timeStr = data.timestamp ? new Date(data.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : "??";
-  const contentHtml = (data.type === 'art') ? data.message : escapeHtml(data.message);
-  
-  const msgEl = document.createElement("div");
-  msgEl.className = "message";
-  msgEl.innerHTML = `
-    <span class="message-username">${escapeHtml(data.username)}</span>
-    <div class="message-text">${contentHtml}</div>
-    <span class="message-time">${timeStr}</span>
-  `;
-  
-  chatMessages.appendChild(msgEl);
-  chatMessages.scrollTop = chatMessages.scrollHeight;
+  try {
+    const timeStr = data.timestamp ? new Date(data.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : "??";
+    const contentHtml = (data.type === 'art') ? data.message : escapeHtml(data.message);
+    
+    const msgEl = document.createElement("div");
+    msgEl.className = "message";
+    msgEl.innerHTML = `
+      <span class="message-username">${escapeHtml(data.username)}</span>
+      <div class="message-text">${contentHtml}</div>
+      <span class="message-time">${timeStr}</span>
+    `;
+    
+    chatMessages.appendChild(msgEl);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    console.log("Message added to UI:", data);
+  } catch (uiError) {
+    console.error("Error adding message to UI:", uiError, data);
+  }
 }
 
 function sendMessage() {
@@ -355,8 +359,10 @@ function sendMessage() {
   }, (error) => {
     if (error) {
       alert("Send Failed: " + error.message);
+      console.error("Firebase write error (text message):", error);
     } else {
       messageInput.value = "";
+      console.log("Text message sent to Firebase.");
     }
   });
 }
@@ -376,6 +382,9 @@ function sendDrawing() {
   }, (error) => {
     if (error) {
       alert("Art Failed: " + error.message);
+      console.error("Firebase write error (drawing):", error);
+    } else {
+      console.log("Drawing sent to Firebase.");
     }
   });
 }
@@ -385,11 +394,16 @@ messageInput.addEventListener("keypress", (e) => { if(e.key === 'Enter') sendMes
 sendDrawButton.addEventListener("click", sendDrawing);
 
 if (db) {
+  console.log("Setting up Firebase listener for 'chat' node.");
   db.ref("chat").limitToLast(50).on("child_added", snapshot => {
+    console.log("Firebase 'child_added' event triggered!");
     const data = snapshot.val();
+    console.log("Data received from Firebase:", data);
     const loading = document.getElementById("loading-msg");
     if(loading) loading.remove();
     addMessageToUI(data);
+  }, (error) => { // Added error callback for the listener
+    console.error("Firebase 'child_added' listener error:", error);
   });
 }
 
@@ -504,7 +518,4 @@ document.querySelectorAll(".sticker").forEach(st => {
     };
   });
 });
-
 </script>
-</body>
-</html>
