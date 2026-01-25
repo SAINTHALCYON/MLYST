@@ -6,7 +6,6 @@
 <title>SAINTHALCYON'S LOUNGE</title>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
-<!-- Using Compat libraries for easier HTML/JS implementation -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
@@ -274,8 +273,8 @@
 
         <div id="sticker-container">
           <img class="sticker" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5gQWES425Y6w3wAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAOElEQVRYw+3WMQoAIAwDwO7+/zU0E6aA4S04Q5M9O6p7s27s27s27s27s27s27s27s27s27s27s2T4AcL4B9U4B4T4AAAAASUVORK5CYII=" title="Heart">
-          <img class="sticker" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5gQWES425Y6w3wAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAUklEQVRYw+3WsQqAMAwEwU9F+/6sQ0Mq4OaM0D2mZ8D7J3+4d38O2T7pN2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt92g3+gf8g9O4B9Q0B4j0AAAAASUVORK5CYII=" title="Star">
-          <img class="sticker" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5gQWES425Y6w3wAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAdklEQVRYw+3WMQoAIAwDwO7+/zWw02mM0D6d0D2VZ8PpN3+4d38O2T7pN2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt92h3+A/8Q9e4A9Q4B4z0AAAAASUVORK5CYII=" title="Smile">
+          <img class="sticker" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5gQWES425Y6w3wAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAUklEQVRYw+3WsQqAMAwEwU9F+/6sQ0Mq4OaM0D2mZ8D7J3+4d38O2T7pN2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt92g3+gf8g9O4B9Q0B4j0AAAAASUVORK5CYII=" title="Star">
+          <img class="sticker" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5gQWES425Y6w3wAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAdklEQVRYw+3WMQoAIAwDwO7+/zWw02mM0D6d0D2VZ8PpN3+4d38O2T7pN2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt2m3aTdpt92h3+A/8Q9e4A9Q4B4z0AAAAASUVORK5CYII=" title="Smile">
         </div>
       </div>
     </div>
@@ -297,7 +296,8 @@ const firebaseConfig = {
   storageBucket: "sainthalcyon-23fd5.firebasestorage.app",
   messagingSenderId: "907348360352",
   appId: "1:907348360352:web:9fc9b04e225ba07b751dc5",
-  measurementId: "G-NLF0GCMD2H"
+  measurementId: "G-NLF0GCMD2H",
+  databaseURL: "https://sainthalcyon-23fd5-default-rtdb.asia-southeast1.firebasedatabase.app/"
 };
 
 let db = null;
@@ -338,9 +338,8 @@ function addMessageToUI(data) {
     
     chatMessages.appendChild(msgEl);
     chatMessages.scrollTop = chatMessages.scrollHeight;
-    console.log("Message added to UI:", data);
   } catch (uiError) {
-    console.error("Error adding message to UI:", uiError, data);
+    console.error("Error adding message to UI:", uiError);
   }
 }
 
@@ -358,10 +357,9 @@ function sendMessage() {
   }, (error) => {
     if (error) {
       alert("Send Failed: " + error.message);
-      console.error("Firebase write error (text message):", error);
+      console.error("Firebase write error:", error);
     } else {
       messageInput.value = "";
-      console.log("Text message sent to Firebase.");
     }
   });
 }
@@ -381,9 +379,6 @@ function sendDrawing() {
   }, (error) => {
     if (error) {
       alert("Art Failed: " + error.message);
-      console.error("Firebase write error (drawing):", error);
-    } else {
-      console.log("Drawing sent to Firebase.");
     }
   });
 }
@@ -393,16 +388,14 @@ messageInput.addEventListener("keypress", (e) => { if(e.key === 'Enter') sendMes
 sendDrawButton.addEventListener("click", sendDrawing);
 
 if (db) {
-  console.log("Setting up Firebase listener for 'chat' node.");
   db.ref("chat").limitToLast(50).on("child_added", snapshot => {
-    console.log("Firebase 'child_added' event triggered!");
     const data = snapshot.val();
-    console.log("Data received from Firebase:", data);
     const loading = document.getElementById("loading-msg");
     if(loading) loading.remove();
     addMessageToUI(data);
-  }, (error) => { // Added error callback for the listener
-    console.error("Firebase 'child_added' listener error:", error);
+  }, (error) => {
+    console.error("Listener Error:", error);
+    alert("Connection Error: " + error.message);
   });
 }
 
@@ -518,3 +511,5 @@ document.querySelectorAll(".sticker").forEach(st => {
   });
 });
 </script>
+</body>
+</html>
