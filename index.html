@@ -8,18 +8,19 @@
 
 <style>
 body {
-  background: #fbe7ef;
+  background: url("@nekomimiyu · ♡ mii ♡ 1646.gif") repeat;
+  background-size: auto;
   font-family: 'Press Start 2P', monospace;
   margin: 0;
   font-size: 10px;
   -webkit-font-smoothing: none;
   text-rendering: optimizeSpeed;
 }
+
 #page {
   width: 1000px;
   margin: 20px auto;
   background: #fff5fb;
-
   border-width: 14px;
   border-style: solid;
   border-image: url("DIVIDER3.png") 30 round;
@@ -40,11 +41,12 @@ body {
   grid-template-columns: 200px 600px 200px;
 }
 
-#left {
+#left, #right {
   background: #ffeaf4;
   padding: 8px;
-  border-right: 3px solid #000;
 }
+#left { border-right: 3px solid #000; }
+#right { border-left: 3px solid #000; }
 
 .counter {
   border: 2px dotted #000;
@@ -58,12 +60,6 @@ body {
 #center {
   background: #fff;
   padding: 10px;
-}
-
-#right {
-  background: #ffeaf4;
-  padding: 8px;
-  border-left: 3px solid #000;
 }
 
 .navbutton {
@@ -111,6 +107,7 @@ body {
   padding: 4px;
   background: #fff;
 }
+
 .stamp {
   display: inline-block;
   width: 120px;
@@ -122,20 +119,53 @@ body {
   height: 100%;
 }
 
+#music-player {
+  margin-top: 10px;
+  padding: 8px;
+  border: 2px solid #000;
+  background: #fffdf7;
+  text-align: center;
+}
+
+#music-player button {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  padding: 4px 6px;
+  margin-top: 4px;
+  background: #ffd1e5;
+  border: 2px solid #000;
+  cursor: pointer;
+}
+
+#music-player button:hover {
+  background: #ffbcd9;
+}
+
+.now-playing {
+  margin-bottom: 6px;
+  animation: pastelShift 6s linear infinite;
+}
+
+@keyframes pastelShift {
+  0% { color: #ffb3c6; }
+  20% { color: #ffd6a5; }
+  40% { color: #fdffb6; }
+  60% { color: #caffbf; }
+  80% { color: #bdb2ff; }
+  100% { color: #ffb3c6; }
+}
+
 #footer {
   border-top: 3px solid #000;
   padding: 4px 0;
-  background: #fff5fb;
 }
 
 .footer-divider {
   width: 600px;
   margin: auto;
 }
-
 .footer-divider img {
   width: 100%;
-  display: block;
 }
 </style>
 </head>
@@ -144,70 +174,75 @@ body {
 
 <div id="page">
 
-  <div id="header">
-    <img src="RAH.jpeg">
-  </div>
+<div id="header"><img src="RAH.jpeg"></div>
 
-  <div id="main">
+<div id="main">
 
-    <div id="left">
-      <img src="MLYST.jpeg" width="100%">
+<div id="left">
+<img src="MLYST.jpeg" width="100%">
+<div class="counter">visitors:<br>11111</div>
+<img src="download.jpeg" width="100%">
+</div>
 
-      <div class="counter">
-        visitors:<br>
-        11111
-      </div>
+<div id="center">
 
-      <img src="download.jpeg" width="100%">
-    </div>
+<div class="box cute-border">
+SAINTHALCYON'S ALTARETTE ♡<br><br>
+UNASHAMED TCCTARD<br>
+I TRANSHEART ERIC HARRIS (˶°ㅁ°)!!
+</div>
 
-    <div id="center">
+<div class="divider"><img src="bowdivider.png"></div>
 
-      <div class="box cute-border">
-        SAINTHALCYON'S ALTARETTE ♡<br><br>
-        UNASHAMED TCCTARD <br>
-        I TRANSHEART ERIC HARRIS (˶°ㅁ°)!!
-      </div>
+<div class="box">
+UPDATE LOG<br>
+25/01/2026 – NEW WEBSITE!!! (FOR THE THIRD TIME)
+</div>
 
-      <div class="divider">
-        <img src="bowdivider.png">
-      </div>
+<div id="stamps">
+<div class="stamp"><img src="LUKADDICTSTAMP.png"></div>
+<div class="stamp"><img src="RIAKOSTAMP.png"></div>
+<div class="stamp"><img src="KANGEL3.png"></div>
+<div class="stamp"><img src="BEMINE.png"></div>
+<div class="stamp"><img src="ADDICTED.webp"></div>
+</div>
 
-      <div class="box">
-        UPDATE LOG<br>
-        25/01/2026 SUNDAY 9:48AM – NEW WEBSITE!!! (FOR THE THIRD TIME)
-      </div>
-
-      <div id="stamps">
-        <div class="stamp"><img src="LUKADDICTSTAMP.png"></div>
-        <div class="stamp"><img src="RIAKOSTAMP.png"></div>
-        <div class="stamp"><img src="KANGEL3.png"></div>
-        <div class="stamp"><img src="BEMINE.png"></div>
-        <div class="stamp"><img src="ADDICTED.webp"></div>
-      </div>
-
-    </div>
-
-    <div id="right">
-
-      <a href="index.html" class="navbutton">HOME</a>
-      <a href="blog.html" class="navbutton">DIARY / BLOG</a>
-      <a href="shrines.html" class="navbutton">CHATBOX</a>
-      <a href="archive.html" class="navbutton">ARTWORKS</a>
-      <a href="media.html" class="navbutton">ERIC HARRIS</a>
-      <a href="work.html" class="navbutton">FRIENDSLIST</a>
-      <a href="guestbook.html" class="navbutton">GUESTBOOK</a>
-
-      <div class="divider">
-        <img src="HUH.jpeg">
-      </div>
-
-    </div>
-    
-    </div>
-  </div>
+<div id="music-player">
+<div class="now-playing">NOW PLAYING: track.mp3</div>
+<audio id="audio">
+<source src="Trash.mp3" type="audio/mpeg">
+</audio>
+<button onclick="toggleMusic()">PLAY / PAUSE</button>
+</div>
 
 </div>
+
+<div id="right">
+<a href="index.html" class="navbutton">HOME</a>
+<a href="blog.html" class="navbutton">DIARY / BLOG</a>
+<a href="shrines.html" class="navbutton">CHATBOX</a>
+<a href="archive.html" class="navbutton">ARTWORKS</a>
+<a href="media.html" class="navbutton">ERIC HARRIS</a>
+<a href="work.html" class="navbutton">FRIENDSLIST</a>
+<a href="guestbook.html" class="navbutton">GUESTBOOK</a>
+<div class="divider"><img src="HUH.jpeg"></div>
+</div>
+
+</div>
+
+<div id="footer">
+<div class="footer-divider"><img src="DIVIDER3.png"></div>
+</div>
+
+</div>
+
+<script>
+const audio = document.getElementById("audio");
+function toggleMusic() {
+  if (audio.paused) audio.play();
+  else audio.pause();
+}
+</script>
 
 </body>
 </html>
