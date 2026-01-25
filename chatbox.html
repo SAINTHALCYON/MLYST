@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SAINTHALCYON Chatbox</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+<style>
+body {
+  background: #ffd1e5;
+  font-family: 'Press Start 2P', monospace;
+  margin: 0;
+  font-size: 10px;
+}
+
+/* ===== PAGE ===== */
+#page {
+  width: 1000px;
+  margin: 20px auto;
+  background: #fff5fb;
+  border-width: 14px;
+  border-style: solid;
+  border-image: url("DIVIDER3.png") 30 round;
+  padding: 10px;
+}
+
+/* ===== HEADER / BANNER ===== */
+#banner {
+  width: 100%;
+  height: 150px;
+  border: 3px solid #6b6b6b;
+  border-image: url("dividercake.png") 30 round;
+  margin-bottom: 10px;
+  background-size: cover;
+  background-position: center;
+}
+
+/* ===== CHAT AREA ===== */
+#chat-container {
+  display: flex;
+  gap: 10px;
+}
+
+#chat-messages {
+  flex: 2;
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 6px;
+  border: 3px double #6b6b6b;
+  background: #fffdf7;
+}
+
+.message {
+  border-bottom: 1px dotted #6b6b6b;
+  margin-bottom: 4px;
+  padding-bottom: 2px;
+}
+
+.message-username { color: #ff8fab; }
+.message-text { margin: 2px 0; }
+.message-time { font-size: 7px; color: #6b6b6b; }
+
+/* ===== DRAWING AREA ===== */
+#draw-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#canvas-container {
+  position: relative;
+  border: 3px double #6b6b6b;
+}
+
+#draw-canvas {
+  width: 100%;
+  height: 200px;
+  background: #fffdf7;
+  image-rendering: pixelated;
+  cursor: crosshair;
+}
+
+#color-palette {
+  display: flex;
+  gap: 4px;
+}
+
+.color-swatch {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #6b6b6b;
+  cursor: pointer;
+}
+
+/* ===== INPUTS ===== */
+#chat-input {
+  display: flex;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+#username, #message {
+  padding: 2px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+}
+
+#username { width: 100px; }
+#message { flex: 1; }
+
+#send-button {
+  padding: 2px 6px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  cursor: pointer;
+  background: linear-gradient(#ffe3ef, #ffbcd9);
+  border: 2px solid #6b6b6b;
+}
+
+/* ===== STICKERS ===== */
+#sticker-container {
+  margin-top: 6px;
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.sticker {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  object-fit: cover;
+}
+</style>
+</head>
+
+<body>
+
+<div id="page">
+
+  <div id="banner" style="background-image:url('banner1.gif')"></div>
+
+  <div id="chat-container">
+
+    <div id="chat-messages"></div>
+
+    <div id="draw-container">
+      <div id="canvas-container">
+        <canvas id="draw-canvas"></canvas>
+      </div>
+      <div id="color-palette"></div>
+      <div id="sticker-container">
+        <img class="sticker" src="sticker1.gif">
+        <img class="sticker" src="sticker2.gif">
+        <img class="sticker" src="sticker3.gif">
+      </div>
+    </div>
+
+  </div>
+
+  <div id="chat-input">
+    <input type="text" id="username" placeholder="username">
+    <input type="text" id="message" placeholder="message">
+    <button id="send-button">SEND</button>
+  </div>
+
+</div>
+
+<script>
+
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_AUTH_DOMAIN",
+  databaseURL: "YOUR_DATABASE_URL",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_STORAGE_BUCKET",
+  messagingSenderId: "YOUR_MESSAGING_ID",
+  appId: "YOUR_APP_ID"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+// ===== CHAT LOGIC =====
+const chatMessages = document.getElementById("chat-messages");
+const usernameInput = document.getElementById("username");
+const messageInput = document.getElementById("message");
+const sendButton = document.getElementById("send-button");
+
+sendButton.addEventListener("click", () => {
+  const username = usernameInput.value.trim() || "Anon";
+  const message = messageInput.value.trim();
+  if (!message) return;
+  const timestamp = new Date().toISOString();
+  db.ref("chat").push({ username, message, timestamp });
+  messageInput.value = "";
+});
+
+// Listen for new messages
+db.ref("chat").on("child_added", (snapshot) => {
+  const data = snapshot.val();
+  const time = new Date(data.timestamp);
+  const timeStr = time.toLocaleString("en-US", { hour12:false });
+  const msgEl = document.createElement("div");
+  msgEl.className = "message";
+  msgEl.innerHTML = `
+    <div class="message-username">${data.username}</div>
+    <div class="message-text">${data.message}</div>
+    <div class="message-time">${timeStr}</div>
+  `;
+  chatMessages.appendChild(msgEl);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+});
+
+// ===== DRAWING LOGIC =====
+const canvas = document.getElementById("draw-canvas");
+const ctx = canvas.getContext("2d");
+
+// Explicit canvas size
+canvas.width = canvas.offsetWidth || 200;
+canvas.height = canvas.offsetHeight || 200;
+
+ctx.lineWidth = 4;
+ctx.lineCap = "square";
+
+let drawing = false;
+let color = "#ff8fab";
+
+// Pastel palette
+const pastelColors = ["#ff8fab","#ffc6ff","#bdb2ff","#caffbf","#ffd6a5","#fff7fb"];
+const palette = document.getElementById("color-palette");
+
+// Build palette
+pastelColors.forEach(c => {
+  const sw = document.createElement("div");
+  sw.className = "color-swatch";
+  sw.style.background = c;
+  sw.addEventListener("click", () => { color = c; });
+  palette.appendChild(sw);
+});
+
+// Drawing events
+canvas.addEventListener("mousedown", e => { drawing = true; ctx.beginPath(); ctx.moveTo(e.offsetX, e.offsetY); });
+canvas.addEventListener("mousemove", e => { if(drawing){ ctx.strokeStyle=color; ctx.lineTo(e.offsetX, e.offsetY); ctx.stroke(); } });
+canvas.addEventListener("mouseup", () => { drawing=false; ctx.closePath(); });
+canvas.addEventListener("mouseleave", () => { drawing=false; ctx.closePath(); });
+
+// ===== STICKER LOGIC =====
+const stickers = document.querySelectorAll(".sticker");
+stickers.forEach(st => {
+  st.addEventListener("click", () => {
+    const img = new Image();
+    img.src = st.src;
+    img.onload = () => {
+      ctx.drawImage(img, Math.random() * (canvas.width-40), Math.random() * (canvas.height-40), 40, 40);
+    };
+  });
+});
+</script>
+
+</body>
+</html>
