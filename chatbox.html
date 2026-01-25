@@ -17,7 +17,6 @@ body {
   font-size: 10px;
 }
 
-/* PAGE */
 #page {
   width: 1000px;
   margin: 20px auto;
@@ -28,7 +27,6 @@ body {
   padding: 10px;
 }
 
-/* BANNER */
 #banner {
   width: 100%;
   height: 150px;
@@ -39,13 +37,7 @@ body {
   background-position: center;
 }
 
-/* CHAT + DRAW CONTAINER */
-#chat-container {
-  display: flex;
-  gap: 10px;
-}
-
-/* CHAT MESSAGES */
+#chat-container { display: flex; gap: 10px; }
 #chat-messages {
   flex: 2;
   max-height: 400px;
@@ -54,44 +46,38 @@ body {
   border: 3px double #6b6b6b;
   background: #fffdf7;
 }
-
 .message { border-bottom: 1px dotted #6b6b6b; margin-bottom:4px; padding-bottom:2px; }
 .message-username { color: #ff8fab; }
 .message-text { margin: 2px 0; }
 .message-time { font-size: 7px; color: #6b6b6b; }
 
-/* DRAWING AREA */
 #draw-container { flex: 1; display: flex; flex-direction: column; gap: 6px; }
 #canvas-container { position: relative; border: 3px double #6b6b6b; width: 220px; height: 220px; }
-#draw-canvas { width: 220px; height: 220px; background: #fffdf7; image-rendering: pixelated; cursor: crosshair; }
+#draw-canvas { width: 100%; height: 100%; background: #fffdf7; image-rendering: pixelated; cursor: crosshair; display:block; }
 
 #color-palette { display: flex; gap: 4px; margin-top:4px; }
 .color-swatch { width: 20px; height: 20px; border: 1px solid #6b6b6b; cursor: pointer; }
 
 #pen-size { margin-top: 4px; }
 
-/* STICKERS */
 #sticker-container { margin-top: 6px; display: flex; gap: 4px; flex-wrap: wrap; }
 .sticker { width: 40px; height: 40px; cursor: pointer; object-fit: cover; }
 
-/* INPUTS */
 #chat-input { display: flex; gap: 4px; margin-top: 6px; }
 #username, #message { padding: 2px; font-family: 'Press Start 2P', monospace; font-size: 9px; }
 #username { width: 100px; }
 #message { flex: 1; }
-#send-button { padding: 2px 6px; font-family: 'Press Start 2P', monospace; font-size: 9px; cursor:pointer; background: linear-gradient(#ffe3ef, #ffbcd9); border: 2px solid #6b6b6b; }
-#send-draw-button { padding: 2px 6px; font-family: 'Press Start 2P', monospace; font-size: 9px; cursor:pointer; background: linear-gradient(#ffe3ef, #ffbcd9); border: 2px solid #6b6b6b; margin-left:2px; }
+#send-button, #send-draw-button { padding: 2px 6px; font-family: 'Press Start 2P', monospace; font-size: 9px; cursor:pointer; background: linear-gradient(#ffe3ef, #ffbcd9); border: 2px solid #6b6b6b; }
+#send-draw-button { margin-left: 2px; }
 </style>
 </head>
 
 <body>
-
 <div id="page">
 
   <div id="banner" style="background-image:url('banner1.gif')"></div>
 
   <div id="chat-container">
-
     <div id="chat-messages"></div>
 
     <div id="draw-container">
@@ -108,7 +94,6 @@ body {
         <img class="sticker" src="sticker3.gif">
       </div>
     </div>
-
   </div>
 
   <div id="chat-input">
@@ -122,88 +107,22 @@ body {
 
 <script>
 const firebaseConfig = {
-  apiKey: "AIzaSyB8eG54hE9HNmiEhx7ON7JKWpqc3a4R7ns",
+  apiKey: "YOUR_API_KEY",
   authDomain: "sainthalcyon-87144.firebaseapp.com",
+  databaseURL: "https://sainthalcyon-87144-default-rtdb.firebaseio.com", // <-- put your Firebase Realtime Database URL here
   projectId: "sainthalcyon-87144",
-  storageBucket: "sainthalcyon-87144.firebasestorage.app",
+  storageBucket: "sainthalcyon-87144.appspot.com",
   messagingSenderId: "257264228367",
-  appId: "1:257264228367:web:313ffc00542858c0152b7a",
-  measurementId: "G-3Q2C6NL4ZT"
+  appId: "1:257264228367:web:313ffc00542858c0152b7a"
 };
-firebase.initializeApp(https://console.firebase.google.com/u/0/project/sainthalcyon-87144/database/sainthalcyon-87144-default-rtdb/data/~2F);
+firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
-// Chat logic
+// CHAT LOGIC
 const chatMessages = document.getElementById("chat-messages");
 const usernameInput = document.getElementById("username");
 const messageInput = document.getElementById("message");
 const sendButton = document.getElementById("send-button");
 const sendDrawButton = document.getElementById("send-draw-button");
 
-sendButton.addEventListener("click", () => {
-  const username = usernameInput.value.trim() || "Anon";
-  const message = messageInput.value.trim();
-  if(!message) return;
-  db.ref("chat").push({ username, message, timestamp: new Date().toISOString() });
-  messageInput.value = "";
-});
-
-sendDrawButton.addEventListener("click", () => {
-  const username = usernameInput.value.trim() || "Anon";
-  const imgData = canvas.toDataURL("image/png");
-  db.ref("chat").push({ username, message:`<img src="${imgData}">`, timestamp: new Date().toISOString() });
-});
-
-// Listen for messages
-db.ref("chat").on("child_added", snapshot=>{
-  const data = snapshot.val();
-  const time = new Date(data.timestamp);
-  const timeStr = time.toLocaleString("en-US",{hour12:false});
-  const msgEl = document.createElement("div");
-  msgEl.className = "message";
-  msgEl.innerHTML = `<div class="message-username">${data.username}</div><div class="message-text">${data.message}</div><div class="message-time">${timeStr}</div>`;
-  chatMessages.appendChild(msgEl);
-  chatMessages.scrollTop = chatMessages.scrollHeight;
-});
-
-// Drawing
-const canvas = document.getElementById("draw-canvas");
-const ctx = canvas.getContext("2d");
-canvas.width = 220;
-canvas.height = 220;
-ctx.lineCap = "square";
-let drawing=false;
-let color="#ff8fab";
-
-const pastelColors = ["#ff8fab","#ffc6ff","#bdb2ff","#caffbf","#ffd6a5","#fff7fb"];
-const palette = document.getElementById("color-palette");
-pastelColors.forEach(c=>{
-  const sw = document.createElement("div");
-  sw.className="color-swatch";
-  sw.style.background=c;
-  sw.addEventListener("click",()=>color=c);
-  palette.appendChild(sw);
-});
-
-// Pen size
-const penSizeInput = document.getElementById("pen-size");
-penSizeInput.addEventListener("input", ()=>ctx.lineWidth=parseInt(penSizeInput.value));
-
-// Draw events
-canvas.addEventListener("mousedown", e=>{ drawing=true; ctx.beginPath(); ctx.moveTo(e.offsetX,e.offsetY); });
-canvas.addEventListener("mousemove", e=>{ if(drawing){ ctx.strokeStyle=color; ctx.lineTo(e.offsetX,e.offsetY); ctx.stroke(); }});
-canvas.addEventListener("mouseup", ()=>{ drawing=false; ctx.closePath(); });
-canvas.addEventListener("mouseleave", ()=>{ drawing=false; ctx.closePath(); });
-
-// Stickers
-document.querySelectorAll(".sticker").forEach(st=>{
-  st.addEventListener("click", ()=>{
-    const img=new Image();
-    img.src=st.src;
-    img.onload=()=>ctx.drawImage(img, Math.random()*(canvas.width-40), Math.random()*(canvas.height-40),40,40);
-  });
-});
-</script>
-
-</body>
-</html>
+sendButton.addEventListener(
