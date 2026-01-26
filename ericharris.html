@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SAINTHALCYON</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+<style>
+body {
+  background: url("@nekomimiyu · ♡ mii ♡ 1646.gif") repeat;
+  font-family: 'Press Start 2P', monospace;
+  margin: 0;
+  font-size: 10px;
+  -webkit-font-smoothing: none;
+}
+
+:root {
+  --border: #6b6b6b;
+  --soft-pink: #ffd1e5;
+  --soft-pink-dark: #ffbcd9;
+}
+
+/* ===== PAGE ===== */
+#page {
+  width: 1000px;
+  margin: 20px auto;
+  background: #fff5fb;
+  border: 14px solid transparent;
+  border-image: url("DIVIDER3.png") 30 round;
+}
+
+/* ===== HEADER ===== */
+#header {
+  height: 150px;
+  border-bottom: 3px solid var(--border);
+}
+#header img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ===== LAYOUT ===== */
+#main {
+  display: grid;
+  grid-template-columns: 200px 600px 200px;
+}
+
+#left, #right {
+  background: #ffeaf4;
+  padding: 8px;
+}
+#left { border-right: 3px solid var(--border); }
+#right { border-left: 3px solid var(--border); }
+
+#center {
+  background: #fff;
+  padding: 10px;
+}
