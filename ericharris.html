@@ -2,7 +2,36 @@
       <title>Maxspace</title>
       <link rel="icon" href="images/favicon.png" type="image/gif" sizes="16x16">
       <link href="style.css" rel="stylesheet">
-      
+<style>
+#music-player {
+  margin-top: 10px;
+  padding: 10px;
+  border: 2px solid var(--border);
+  background: linear-gradient(#fff7fb, #f2ddea);
+  text-align: center;
+}
+
+.now-playing {
+  margin-bottom: 8px;
+  font-size: 9px;
+  animation: pastelShift 5s linear infinite;
+}
+
+@keyframes pastelShift {
+  0% { color: #ff8fab; }
+  50% { color: #bdb2ff; }
+  100% { color: #ff8fab; }
+}
+
+#music-player button {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  padding: 4px 10px;
+  background: linear-gradient(#ffe3ef, #ffbcd9);
+  border: 2px solid var(--border);
+  cursor: pointer;
+}
+      <style>
       <!-- FONT AWESOME MEDIA PLAYER ICON FIX -->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
@@ -117,20 +146,14 @@
     </div>
     </div>
   </div>
-                  <div class="audio-player" id="audio-player">
-    <button id="playPauseBtn" fdprocessedid="d15icd"><i class="fas fa-play"></i></button>
-    <div class="audio-info">
-      <div class="title">Freezy Flake Galaxy</div>
-      <div class="artist">Super Mario Galaxy 2</div>
-      <div class="volume-slider">
-        <input type="range" id="volumeControl" min="0" max="1" step="0.01" value="0.30" style="background: linear-gradient(to right, rgb(255, 152, 0) 30%, rgb(230, 126, 0) 30%);">
-      </div>
-    </div>
-    <audio id="audioPlayer" style="display:none;">
-      <source src="/audio/freezy-flake-galaxy.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
-  </div>
+               <div id="music-player">
+<div class="now-playing">NOW PLAYING: KISS ME </div>
+<audio id="audio">
+<source src="Kiss me 3.mp3" type="audio/mpeg">
+</audio>
+<button onclick="toggleMusic()">▶ PLAY / ❚❚ PAUSE</button>
+</div>
+ 
 
                   <br>
 
