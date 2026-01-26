@@ -58,3 +58,224 @@ body {
   background: #fff;
   padding: 10px;
 }
+
+/* ===== NAV ===== */
+.navbutton {
+  display: block;
+  background: var(--soft-pink);
+  border: 2px solid var(--border);
+  margin-bottom: 6px;
+  padding: 6px;
+  text-align: center;
+  font-size: 9px;
+  text-decoration: none;
+  color: #000;
+}
+.navbutton:hover {
+  background: var(--soft-pink-dark);
+}
+
+.box {
+  border: 3px double var(--border);
+  padding: 8px;
+  background: #fffdf7;
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.cute-border {
+  border-width: 10px;
+  border-style: solid;
+  border-image: url("dividercake.png") 30 round;
+}
+
+/* ===== DIVIDERS ===== */
+.divider {
+  margin: 6px 0;
+  text-align: center;
+}
+.divider img {
+  max-width: 90%;
+}
+
+/* ===== STAMPS ===== */
+#stamps {
+  margin-top: 8px;
+  overflow-x: auto;
+  white-space: nowrap;
+  border: 2px solid var(--border);
+  padding: 4px;
+  background: #fff;
+}
+.stamp {
+  display: inline-block;
+  width: 120px;
+  height: 40px;
+  margin-right: 4px;
+}
+.stamp img {
+  width: 100%;
+  height: 100%;
+}
+
+/* ===== CLICKABLE IMAGE BUTTON ===== */
+#sparkle-button {
+  margin-top: 6px;
+  position: relative;
+  cursor: pointer;
+  border: 2px dashed #ff9acb;
+  padding: 4px;
+  background: #fff;
+  animation: softPulse 2s infinite;
+}
+
+#sparkle-button img {
+  width: 100%;
+  display: block;
+}
+
+#sparkle-button:hover {
+  box-shadow: 0 0 10px #ffb6d9;
+}
+
+@keyframes softPulse {
+  0% { box-shadow: 0 0 4px #ffd1e5; }
+  50% { box-shadow: 0 0 10px #ff9acb; }
+  100% { box-shadow: 0 0 4px #ffd1e5; }
+}
+
+.particle {
+  position: absolute;
+  font-size: 14px;
+  pointer-events: none;
+  animation: floatUp 1.5s ease-out forwards;
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-40px) scale(1.4);
+  }
+}
+#music-player {
+  margin-top: 10px;
+  padding: 10px;
+  border: 2px solid var(--border);
+  background: linear-gradient(#fff7fb, #f2ddea);
+  text-align: center;
+}
+
+.now-playing {
+  margin-bottom: 8px;
+  font-size: 9px;
+  animation: pastelShift 5s linear infinite;
+}
+
+@keyframes pastelShift {
+  0% { color: #ff8fab; }
+  50% { color: #bdb2ff; }
+  100% { color: #ff8fab; }
+}
+
+#music-player button {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  padding: 4px 10px;
+  background: linear-gradient(#ffe3ef, #ffbcd9);
+  border: 2px solid var(--border);
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header"><img src="RAH.jpeg"></div>
+
+<div id="main">
+
+<div id="left">
+<img src="MLYST.jpeg" width="100%">
+
+  <div class="box">
+    <h2> LOVELIST </h2>
+    <div class="inner">
+      MUSIC: 
+
+<div id="center">
+
+<div class="box cute-border">
+SAINTHALCYON'S ALTARETTE ♡<br><br>
+UNASHAMED DEGENERATE<br>
+  FORMERLY STUDIOMILITARY ON TUMBLR POSTING ART OF PERPETRATORS <br>
+42099 (˶°ㅁ°)!!
+</div>
+
+<div class="divider"><img src="bowdivider.png"></div>
+
+<div class="box">
+UPDATE LOG<br>
+25/01/2026 – NEW WEBSITE!!! (FOR THE THIRD TIME)
+</div>
+
+<div id="stamps">
+<div class="stamp"><img src="LUKADDICTSTAMP.png"></div>
+<div class="stamp"><img src="RIAKOSTAMP.png"></div>
+<div class="stamp"><img src="KANGEL3.png"></div>
+<div class="stamp"><img src="BEMINE.png"></div>
+<div class="stamp"><img src="ADDICTED.webp"></div>
+</div>
+
+<div id="music-player">
+<div class="now-playing">NOW PLAYING: KISS ME </div>
+<audio id="audio">
+<source src="Kiss me 3.mp3" type="audio/mpeg">
+</audio>
+<button onclick="toggleMusic()">▶ PLAY / ❚❚ PAUSE</button>
+</div>
+
+</div>
+
+<div id="right">
+<a href="index.html" class="navbutton">HOME</a>
+<a href="blog.html" class="navbutton">DIARY / BLOG</a>
+<a href="chatbox.html" class="navbutton">CHATBOX</a>
+<a href="artworks.html" class="navbutton">ARTWORKS</a>
+<a href="ericharris.html" class="navbutton">ERIC HARRIS</a>
+<a href="friendlist.html" class="navbutton">FRIENDSLIST</a>
+<a href="guestbook.html" class="navbutton">GUESTBOOK</a>
+</div>
+
+</div>
+</div>
+
+<script>
+const audio = document.getElementById("audio");
+function toggleMusic() {
+  audio.paused ? audio.play() : audio.pause();
+}
+
+const button = document.getElementById("sparkle-button");
+const particles = ["♡","♥","✧","✦","(≧◡≦)","(´｡• ω •｡`)","☆"];
+
+button.addEventListener("click", () => {
+  for (let i = 0; i < 12; i++) {
+    const p = document.createElement("div");
+    p.className = "particle";
+    p.textContent = particles[Math.floor(Math.random()*particles.length)];
+    p.style.left = Math.random() * 80 + "%";
+    p.style.top = Math.random() * 20 + "px";
+    button.appendChild(p);
+    setTimeout(() => p.remove(), 1500);
+  }
+});
+</script>
+
+</body>
+</html>
